@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SpeakSure_Capstone</string>
+    <string name="register">Register</string>
+    <string name="selamat_dat">Selamat datang di SpeakSure</string>
+    <string name="label">Name</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
 </resources>
