@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/purple_200">
+    android:background="@color/purple_200"
+    tools:context=".register.RegisterActivity">
 
     <TextView
         android:id="@+id/tv_register"
@@ -23,8 +25,8 @@
 
     <TextView
         android:id="@+id/selamat_dat"
-        android:layout_width="239dp"
-        android:layout_height="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
@@ -37,7 +39,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="?attr/textInputFilledStyle"
-        android:id="@+id/edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/label"
@@ -55,6 +56,7 @@
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
@@ -67,8 +69,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="?attr/textInputFilledStyle"
-        android:inputType="textEmailAddress"
-        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/label_email"
@@ -86,6 +86,8 @@
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_email"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
@@ -98,8 +100,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="?attr/textInputFilledStyle"
-        android:inputType="textPassword"
-        android:id="@+id/edit_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/label_password"
@@ -118,6 +118,8 @@
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_password"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
@@ -125,7 +127,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:viewportWidth="380"
-            android:viewportHeight="56" />
+            android:viewportHeight="56"
+            app:passwordToggleEnabled="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -138,6 +141,18 @@
         android:layout_marginEnd="15dp"
         android:backgroundTint="@color/purple_500"
         android:text="@string/register"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btn_to_login"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="470dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/purple_500"
+        android:text="@string/back_login"
         android:textColor="@color/black" />
 
 </RelativeLayout>

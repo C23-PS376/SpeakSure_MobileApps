@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.speaksure_capstone">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,10 +16,13 @@
         android:theme="@style/Theme.SpeakSure_Capstone"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".dashboard.HomepageActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
