@@ -18,7 +18,7 @@
         android:layout_marginTop="68dp"
         android:gravity="top"
         android:lineSpacingExtra="2sp"
-        android:text="@string/register"
+        android:text="@string/login"
         android:textAppearance="@style/register"
         android:translationY="-1.11sp" />
 
@@ -32,38 +32,8 @@
         android:layout_marginTop="108dp"
         android:gravity="top"
         android:lineSpacingExtra="-5sp"
-        android:text="@string/selamat_dat"
+        android:text="@string/selamat_kem"
         android:textAppearance="@style/selamat_dat" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputFilledStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/label"
-        android:width="380dp"
-        android:height="56dp"
-        android:viewportWidth="380"
-        android:viewportHeight="56"
-        android:strokeWidth="2"
-        android:strokeColor="#1C1B1F"
-        android:fillColor="#E7E0EC"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="-355dp"
-        app:startIconDrawable="@drawable/ic_baseline_person_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:viewportWidth="380"
-            android:viewportHeight="56" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="?attr/textInputFilledStyle"
@@ -130,27 +100,30 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_login"
         style="@style/Widget.Material3.Button.Icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="420dp"
         android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/md_theme_light_background"
-        android:text="@string/register"
+        android:backgroundTint="@color/md_theme_light_primary"
+        android:text="@string/login"
         android:textColor="@color/md_theme_light_onBackground" />
 
-    <Button
-        android:id="@+id/btn_to_login"
-        style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/login_progressBar"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="470dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/md_theme_light_background"
-        android:text="@string/back_login"
-        android:textColor="@color/md_theme_light_onBackground" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396" />
+
+
 
 </RelativeLayout>

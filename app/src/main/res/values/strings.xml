@@ -7,4 +7,6 @@
     <string name="label_password">Password</string>
     <string name="back_login">Kembali ke halaman login</string>
     <string name="back_register">Ke halaman register</string>
+    <string name="login">Login</string>
+    <string name="selamat_kem">Selamat Datang Kembali</string>
 </resources>
