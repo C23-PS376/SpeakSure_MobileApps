@@ -2,7 +2,7 @@ package com.example.speaksure_capstone.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse(
+data class LoginRegisterResponse(
 
 	@field:SerializedName("data")
 	val data: List<DataItem?>? = null,
