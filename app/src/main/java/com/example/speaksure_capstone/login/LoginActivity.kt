@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.databinding.ActivityLoginBinding
 import com.example.speaksure_capstone.network.ApiConfig
-import com.example.speaksure_capstone.response.LoginResponse
+import com.example.speaksure_capstone.response.LoginRegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,10 +48,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         ApiConfig
             .getApiService()
             .login(email, password)
-            .enqueue(object : Callback<LoginResponse> {
+            .enqueue(object : Callback<LoginRegisterResponse> {
                 override fun onResponse(
-                    call: Call<LoginResponse>,
-                    response: Response<LoginResponse>
+                    call: Call<LoginRegisterResponse>,
+                    response: Response<LoginRegisterResponse>
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.data?.apply {
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
 
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                override fun onFailure(call: Call<LoginRegisterResponse>, t: Throwable) {
                     showLoading(false)
                     Toast.makeText(this@LoginActivity, "Data Invalid", Toast.LENGTH_SHORT).show()
                 }

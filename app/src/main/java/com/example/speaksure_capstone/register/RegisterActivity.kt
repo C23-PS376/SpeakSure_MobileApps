@@ -1,22 +1,18 @@
 package com.example.speaksure_capstone.register
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.dashboard.HomepageActivity
 import com.example.speaksure_capstone.databinding.ActivityRegisterBinding
 import com.example.speaksure_capstone.network.ApiConfig
-import com.example.speaksure_capstone.response.RegisterResponse
+import com.example.speaksure_capstone.response.LoginRegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,8 +65,8 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 else -> {
                     val client = ApiConfig.getApiService().register(email, name, password)
-                    client.enqueue(object : Callback<RegisterResponse> {
-                        override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+                    client.enqueue(object : Callback<LoginRegisterResponse> {
+                        override fun onResponse(call: Call<LoginRegisterResponse>, response: Response<LoginRegisterResponse>) {
                             if (response.isSuccessful && response.body()?.statusCode == 201) {
                                 Toast.makeText(this@RegisterActivity,"success", Toast.LENGTH_SHORT).show()
                             } else {
@@ -79,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
                             }
                         }
 
-                        override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                        override fun onFailure(call: Call<LoginRegisterResponse>, t: Throwable) {
                             Toast.makeText(this@RegisterActivity,t.message, Toast.LENGTH_SHORT).show()
                             Log.e(ContentValues.TAG, "onFailure: ${t.message}")
                         }
