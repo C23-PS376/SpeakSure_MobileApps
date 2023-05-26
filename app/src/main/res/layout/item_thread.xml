@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:id="@+id/card"
+    card_view:strokeColor="@color/md_theme_dark_onSurfaceVariant"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
@@ -28,6 +29,7 @@
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.8"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
@@ -97,7 +99,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="194dp"
-            app:srcCompat="@drawable/img"
+            app:srcCompat="@drawable/ic_baseline_insert_photo_24"
             android:scaleType="centerCrop"
             android:contentDescription="@string/content_description_media" />
             />
@@ -124,7 +126,6 @@
                 style="?attr/borderlessButtonStyle"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
                 android:text="@string/JumlahUp" />
 
             <ImageButton
@@ -142,7 +143,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_baseline_mode_comment_24" />
+                android:src="@drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48" />
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="60dp"
@@ -153,9 +154,15 @@
                 />
 
             <Button
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:id="@+id/btn_play_thread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:backgroundTint="@color/seed"
+                android:textColor="@color/md_theme_light_onPrimary"
+                app:icon="@drawable/ic_play_arrow_fill0_wght400_grad0_opsz48"
+                app:iconTint="@color/md_theme_light_onPrimary"
                 android:text="@string/duration"/>
         </LinearLayout>
 
