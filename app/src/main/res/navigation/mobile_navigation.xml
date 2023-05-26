@@ -6,7 +6,7 @@
     app:startDestination="@+id/navigation_home">
 
 
-    <!--<fragment
+    <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.speaksure_capstone.dashboard.HomeFragment"
         android:label="@string/home"
@@ -22,25 +22,9 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.speaksure_capstone.profile.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_profile" />-->
-
-    <activity
-        android:id="@+id/navigation_home"
-        android:name="com.example.speaksure_capstone.dashboard.HomeFragment"
-        android:label="@string/home"
-        tools:layout="@layout/activity_home"/>
-
-    <activity
-        android:id="@+id/navigation_add_thread"
-        android:name="com.example.speaksure_capstone.addthread.AddThreadFragment"
-        android:label="@string/add_new_thread"
-        tools:layout="@layout/activity_add_thread" />
-
-    <activity
-        android:id="@+id/navigation_profile"
-        android:name="com.example.speaksure_capstone.profile.ProfileFragment"
-        android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+
+
 
 
 
