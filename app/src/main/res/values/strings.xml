@@ -9,4 +9,19 @@
     <string name="back_register">Ke halaman register</string>
     <string name="login">Login</string>
     <string name="selamat_kem">Selamat Datang Kembali</string>
+    <string name="searchbar_hint">Cari</string>
+    <string name="title">Bangkit Student</string>
+    <string name="date">23 February 2023</string>
+    <string name="time">09.00,</string>
+    <string name="caption">Hari hariku menyenangkan \n yey \n hore</string>
+    <string name="content_description_media">ini kontent</string>
+    <string name="JumlahUp">94rb</string>
+    <string name="jumlah_comment">100rb</string>
+    <string name="duration">01:00</string>
+    <string name="all">All</string>
+    <string name="politics">Politics</string>
+    <string name="games">Games</string>
+    <string name="anime">Anime</string>
+    <string name="k_pop">K-Pop</string>
+    <string name="sport">Sport</string>
 </resources>
