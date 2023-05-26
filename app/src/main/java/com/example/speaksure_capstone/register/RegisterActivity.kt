@@ -9,8 +9,8 @@ import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.speaksure_capstone.dashboard.HomepageActivity
 import com.example.speaksure_capstone.databinding.ActivityRegisterBinding
+import com.example.speaksure_capstone.login.LoginActivity
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.LoginRegisterResponse
 import retrofit2.Call
@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
         setupAction()
 
         binding.btnToLogin.setOnClickListener{
-            val toLogin = Intent(this@RegisterActivity, HomepageActivity::class.java)
+            val toLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(toLogin)
         }
     }
