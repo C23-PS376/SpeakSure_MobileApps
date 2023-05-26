@@ -18,4 +18,10 @@
     <string name="JumlahUp">94rb</string>
     <string name="jumlah_comment">100rb</string>
     <string name="duration">01:00</string>
+    <string name="all">All</string>
+    <string name="politics">Politics</string>
+    <string name="games">Games</string>
+    <string name="anime">Anime</string>
+    <string name="k_pop">K-Pop</string>
+    <string name="sport">Sport</string>
 </resources>
