@@ -9,11 +9,13 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48.xml" value="0.1505" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_play_arrow_fill0_wght400_grad0_opsz48.xml" value="0.1505" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/register.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_homepage.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_homepage.xml" value="0.22" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_register.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/item_thread.xml" value="0.22" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/item_thread.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/item_thread.xml" value="0.16666666666666666" />
       </map>
     </option>
   </component>
@@ -22,5 +24,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.10177514792899409" />
+      </ProjectState>
+    </option>
   </component>
 </project>

@@ -9,6 +9,12 @@
     <string name="back_register">Ke halaman register</string>
     <string name="login">Login</string>
     <string name="selamat_kem">Selamat Datang Kembali</string>
+    <string name="profile">Profile</string>
+    <string name="add_new_thread">Add New Thread</string>
+    <string name="home">Home</string>
+    <string name="to_homepage">ke halaman homepage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="searchbar_hint">Cari</string>
     <string name="title">Bangkit Student</string>
     <string name="date">23 February 2023</string>
@@ -24,4 +30,5 @@
     <string name="anime">Anime</string>
     <string name="k_pop">K-Pop</string>
     <string name="sport">Sport</string>
+    <string name="image">image</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.speaksure_capstone.R
+import com.example.speaksure_capstone.dashboard.HomepageActivity
 import com.example.speaksure_capstone.databinding.ActivityMainBinding
 import com.example.speaksure_capstone.register.RegisterActivity
 
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnToRegister.setOnClickListener{
             val toRegister = Intent(this@MainActivity, RegisterActivity::class.java)
+            startActivity(toRegister)
+        }
+        binding.btnToHomepage.setOnClickListener{
+            val toRegister = Intent(this@MainActivity, HomepageActivity::class.java)
             startActivity(toRegister)
         }
     }

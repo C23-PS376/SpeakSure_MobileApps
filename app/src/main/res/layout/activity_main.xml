@@ -28,4 +28,15 @@
         android:text="@string/back_register"
         android:textColor="@color/md_theme_light_onBackground" />
 
+    <Button
+        android:id="@+id/btn_to_homepage"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_to_register"
+        android:layout_marginTop="62dp"
+        android:backgroundTint="@color/md_theme_light_primary"
+        android:text="@string/to_homepage"
+        android:textColor="@color/md_theme_light_onBackground" />
+
 </RelativeLayout>
