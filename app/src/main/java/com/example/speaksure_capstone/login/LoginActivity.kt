@@ -1,11 +1,14 @@
 package com.example.speaksure_capstone.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.speaksure_capstone.R
+import com.example.speaksure_capstone.dashboard.HomepageActivity
 import com.example.speaksure_capstone.databinding.ActivityLoginBinding
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.LoginRegisterResponse
@@ -15,20 +18,22 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityLoginBinding
-//    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
 
-    /*companion object {
+    companion object {
         const val SHARED_PREFERENCES = "shared_preferences"
         const val NAME = "name"
         const val USER_ID = "user_id"
         const val TOKEN = "token"
         const val ISLOGGEDIN = "isloggedin"
-    }*/
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
         binding.btnLogin.setOnClickListener(this)
     }
@@ -54,12 +59,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     response: Response<LoginRegisterResponse>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.data?.apply {
-                            /*validateLogin(userId, name, token)*/
+                        response.body()?.data?.get(0)?.apply {
+                            validateLogin(accessToken.toString())
                         }
                         Toast.makeText(this@LoginActivity, "Login Succes", Toast.LENGTH_SHORT)
                             .show()
-                        val mainIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                        val mainIntent = Intent(this@LoginActivity, HomepageActivity::class.java)
                         showLoading(false)
                         startActivity(mainIntent)
                         finish()
@@ -75,14 +80,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
 
 
-    /*private fun validateLogin(userId: String, name: String, token: String) {
+    private fun validateLogin(/*userId: String, name: String,*/ token: String) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString(NAME, name)
-        editor.putString(USER_ID, userId)
+        /*editor.putString(NAME, name)
+        editor.putString(USER_ID, userId)*/
         editor.putString(TOKEN, token)
         editor.putBoolean(ISLOGGEDIN, true)
         editor.apply()
-    }*/
+    }
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) binding.loginProgressBar.visibility = View.VISIBLE

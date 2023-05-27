@@ -30,16 +30,15 @@
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintVertical_bias="0.8"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@tools:sample/avatars"
+                android:contentDescription="@string/image" />
 
             <TextView
                 android:id="@+id/Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
                 android:text="@string/title"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
-                app:layout_constraintTop="10dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="@id/iv_photoprofile"
                 card_view:layout_constraintHorizontal_bias="0.693"
@@ -53,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
-                android:fontFamily="@font/poppins"
                 android:text="@string/time"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?android:attr/textColorSecondary"
@@ -66,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
-                android:fontFamily="@font/poppins"
                 android:text="@string/date"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?android:attr/textColorSecondary"
@@ -102,7 +99,6 @@
             app:srcCompat="@drawable/ic_baseline_insert_photo_24"
             android:scaleType="centerCrop"
             android:contentDescription="@string/content_description_media" />
-            />
 
 
 
@@ -119,7 +115,8 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_baseline_arrow_drop_up_24" />
+                android:src="@drawable/ic_baseline_arrow_drop_up_24"
+                android:contentDescription="@string/image"/>
 
             <com.google.android.material.button.MaterialButton
                 style="?attr/borderlessButtonStyle"
@@ -134,7 +131,8 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                android:contentDescription="@string/image"/>
 
             <ImageButton
                 android:id="@+id/btn_comment"
@@ -143,7 +141,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48" />
+                android:src="@drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48"
+                android:contentDescription="@string/image"/>
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="65dp"
