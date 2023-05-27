@@ -1,12 +1,11 @@
-package com.example.speaksure_capstone.login
+package com.example.speaksure_capstone.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.speaksure_capstone.R
-import com.example.speaksure_capstone.dashboard.HomepageActivity
+import com.example.speaksure_capstone.ui.dashboard.HomepageActivity
 import com.example.speaksure_capstone.databinding.ActivityMainBinding
-import com.example.speaksure_capstone.register.RegisterActivity
+import com.example.speaksure_capstone.ui.register.RegisterActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

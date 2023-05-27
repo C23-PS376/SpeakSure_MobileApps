@@ -1,4 +1,4 @@
-package com.example.speaksure_capstone.profile
+package com.example.speaksure_capstone.ui.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

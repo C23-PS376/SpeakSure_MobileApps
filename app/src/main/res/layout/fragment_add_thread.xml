@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/addThreadFragment"
-    tools:context=".addthread.AddThreadFragment">
+    tools:context=".ui.addthread.AddThreadFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

@@ -1,4 +1,4 @@
-package com.example.speaksure_capstone.dashboard
+package com.example.speaksure_capstone.ui.dashboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

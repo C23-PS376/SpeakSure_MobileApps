@@ -25,13 +25,13 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
+                android:contentDescription="@string/image"
                 android:scaleType="centerCrop"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintVertical_bias="0.8"
-                tools:src="@tools:sample/avatars"
-                android:contentDescription="@string/image" />
+                card_view:layout_constraintVertical_bias="1.0"
+                tools:src="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/Name"
@@ -40,17 +40,17 @@
                 android:text="@string/title"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toEndOf="@id/iv_photoprofile"
-                card_view:layout_constraintHorizontal_bias="0.693"
-                card_view:layout_constraintStart_toEndOf="parent"
+                android:layout_marginStart="15dp"
+                card_view:layout_constraintStart_toEndOf="@id/iv_photoprofile"
+                card_view:layout_constraintHorizontal_bias="0.71"
                 card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintVertical_bias="0.356" />
+                card_view:layout_constraintVertical_bias="0.428" />
 
             <TextView
                 android:id="@+id/time_thread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="4dp"
                 android:text="@string/time"
                 android:textAppearance="?attr/textAppearanceBodyMedium"

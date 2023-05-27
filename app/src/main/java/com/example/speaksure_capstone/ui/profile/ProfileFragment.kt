@@ -1,4 +1,4 @@
-package com.example.speaksure_capstone.profile
+package com.example.speaksure_capstone.ui.profile
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

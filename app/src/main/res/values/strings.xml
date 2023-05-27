@@ -30,9 +30,10 @@
     <string name="anime">Anime</string>
     <string name="k_pop">K-Pop</string>
     <string name="sport">Sport</string>
-<<<<<<< HEAD
     <string name="logout">Logout</string>
-=======
     <string name="image">image</string>
->>>>>>> 82486b93fde27402ad12215765ae034d159c6773
+    <string name="comment">Comment :</string>
+    <string name="thread">Thread :</string>
+    <string name="_1_s_thread">%1$s Thread</string>
+    <string name="username">Username</string>
 </resources>

@@ -14,13 +14,13 @@
 
     <fragment
         android:id="@+id/navigation_add_thread"
-        android:name="com.example.speaksure_capstone.addthread.AddThreadFragment"
+        android:name="com.example.speaksure_capstone.ui.addthread.AddThreadFragment"
         android:label="@string/add_new_thread"
         tools:layout="@layout/fragment_add_thread" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.speaksure_capstone.profile.ProfileFragment"
+        android:name="com.example.speaksure_capstone.ui.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 

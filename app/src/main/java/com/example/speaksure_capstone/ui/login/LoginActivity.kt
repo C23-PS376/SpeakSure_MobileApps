@@ -1,4 +1,4 @@
-package com.example.speaksure_capstone.login
+package com.example.speaksure_capstone.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.speaksure_capstone.R
-import com.example.speaksure_capstone.dashboard.HomepageActivity
+import com.example.speaksure_capstone.ui.dashboard.HomepageActivity
 import com.example.speaksure_capstone.databinding.ActivityLoginBinding
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.LoginRegisterResponse

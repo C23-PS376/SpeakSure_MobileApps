@@ -1,4 +1,4 @@
-package com.example.speaksure_capstone.addthread
+package com.example.speaksure_capstone.ui.addthread
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
