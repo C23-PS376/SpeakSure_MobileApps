@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:id="@+id/card"
-    card_view:strokeColor="@color/md_theme_dark_onSurfaceVariant"
+    card_view:strokeColor="@color/md_theme_dark_secondary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
@@ -116,22 +116,22 @@
             <ImageButton
                 android:id="@+id/btn_up"
                 android:layout_width="40dp"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="15dp"
                 android:backgroundTint="@color/cardview_light_background"
                 android:src="@drawable/ic_baseline_arrow_drop_up_24" />
 
             <com.google.android.material.button.MaterialButton
                 style="?attr/borderlessButtonStyle"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:layout_width="55dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:text="@string/JumlahUp" />
 
             <ImageButton
                 android:id="@+id/btn_down"
                 android:layout_width="40dp"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/cardview_light_background"
                 android:src="@drawable/ic_baseline_arrow_drop_down_24" />
@@ -139,15 +139,16 @@
             <ImageButton
                 android:id="@+id/btn_comment"
                 android:layout_width="40dp"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:backgroundTint="@color/cardview_light_background"
                 android:src="@drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48" />
 
             <com.google.android.material.button.MaterialButton
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:layout_width="65dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_marginStart="0dp"
                 android:text="@string/jumlah_comment"
                 style="?attr/borderlessButtonStyle"
