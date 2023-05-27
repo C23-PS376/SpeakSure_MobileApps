@@ -30,4 +30,5 @@
     <string name="anime">Anime</string>
     <string name="k_pop">K-Pop</string>
     <string name="sport">Sport</string>
+    <string name="image">image</string>
 </resources>

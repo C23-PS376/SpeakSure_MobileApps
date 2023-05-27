@@ -15,6 +15,19 @@ class HomepageActivity : AppCompatActivity() {
         binding = ActivityHomepageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /*val fragmentManager =supportFragmentManager
+// Buat instance HomeFragment
+        val homeFragment = HomeFragment()
+
+// Cek apakah fragment sudah ada sebelumnya
+        val fragment = fragmentManager.findFragmentByTag(HomeFragment::class.java.simpleName)
+        if (fragment !is HomeFragment) {
+            // Jika fragment belum ada, tambahkan menggunakan childFragmentManager dari container yang sesuai dalam binding
+            fragmentManager.beginTransaction()
+                .add(binding.frameContainer.id, homeFragment, HomeFragment::class.java.simpleName)
+                .commit()
+        }*/
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
