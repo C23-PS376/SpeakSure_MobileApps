@@ -36,4 +36,8 @@
     <string name="thread">Thread :</string>
     <string name="_1_s_thread">%1$s Thread</string>
     <string name="username">Username</string>
+    <string name="upload">Upload</string>
+    <string name="attach">Attach Voice</string>
+    <string name="record">Record Voice</string>
+    <string name="masukkan_teks">Masukkan teks</string>
 </resources>
