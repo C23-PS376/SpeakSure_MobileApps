@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_nav"
+        android:enabled="true"
+        android:icon="@drawable/home_nav"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/add_nav"
+        android:enabled="true"
+        android:icon="@drawable/add_nav"
+        android:title="@string/add_new_thread"/>
+    <item
+        android:id="@+id/profile_nav"
+        android:enabled="true"
+        android:icon="@drawable/profile_nav"
+        android:title="@string/profile"/>
+
+</menu>

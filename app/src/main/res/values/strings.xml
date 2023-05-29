@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">SpeakSure_Capstone</string>
+    <string name="register">Register</string>
+    <string name="selamat_dat">Selamat datang di SpeakSure</string>
+    <string name="label">Name</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="back_login">Kembali ke halaman login</string>
+    <string name="back_register">Ke halaman register</string>
+    <string name="login">Login</string>
+    <string name="selamat_kem">Selamat Datang Kembali</string>
+    <string name="profile">Profile</string>
+    <string name="add_new_thread">Add New Thread</string>
+    <string name="home">Home</string>
+    <string name="to_homepage">ke halaman homepage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="searchbar_hint">Cari</string>
+    <string name="title">Bangkit Student</string>
+    <string name="date">23 February 2023</string>
+    <string name="time">09.00,</string>
+    <string name="caption">Hari hariku menyenangkan \n yey \n hore</string>
+    <string name="content_description_media">ini kontent</string>
+    <string name="JumlahUp">94rb</string>
+    <string name="jumlah_comment">100rb</string>
+    <string name="duration">01:00</string>
+    <string name="all">All</string>
+    <string name="politics">Politics</string>
+    <string name="games">Games</string>
+    <string name="anime">Anime</string>
+    <string name="k_pop">K-Pop</string>
+    <string name="sport">Sport</string>
+    <string name="logout">Logout</string>
+    <string name="image">image</string>
+    <string name="comment">Comment :</string>
+    <string name="thread">Thread :</string>
+    <string name="_1_s_thread">%1$s Thread</string>
+    <string name="username">Username</string>
+    <string name="record">Record</string>
+    <string name="attach">Attach</string>
+    <string name="upload">Upload</string>
+</resources>
