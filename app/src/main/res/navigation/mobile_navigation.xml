@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.speaksure_capstone.dashboard.HomeFragment"
+        android:name="com.example.speaksure_capstone.ui.dashboard.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
 

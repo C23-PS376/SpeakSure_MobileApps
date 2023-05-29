@@ -7,9 +7,38 @@
     tools:context=".ui.addthread.AddThreadFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello add thread" />
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/search_bar"
+        android:clipToOutline="true">
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="9dp"
+            android:foregroundGravity="center"
+            android:src="@drawable/ic_baseline_account_circle_24" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/ed_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:hint="@string/searchbar_hint" />
+    </RelativeLayout>
 
 </FrameLayout>

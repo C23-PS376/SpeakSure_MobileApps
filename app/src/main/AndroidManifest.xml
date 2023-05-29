@@ -19,9 +19,6 @@
             android:name="com.example.speaksure_capstone.ui.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.speaksure_capstone.ui.login.LoginActivity"
             android:exported="false" />
         <activity

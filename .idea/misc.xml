@@ -9,12 +9,14 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_baseline_insert_photo_24.xml" value="0.1505" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1805" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48.xml" value="0.1505" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_mic_fill0_wght400_grad0_opsz48.xml" value="0.1505" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_play_arrow_fill0_wght400_grad0_opsz48.xml" value="0.1505" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_search_fill0_wght400_grad0_opsz48.xml" value="0.161" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/ic_send_fill0_wght400_grad0_opsz48.xml" value="0.1505" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/register.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/drawable/search_bar.xml" value="0.161" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_detail.xml" value="0.17291666666666666" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_homepage.xml" value="0.22" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_detail.xml" value="0.22" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_homepage.xml" value="0.12" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/activity_profile.xml" value="0.22" />
@@ -22,7 +24,7 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/detail.xml" value="0.171875" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/fragment_add_thread.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/fragment_home.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/fragment_profile.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/item_thread.xml" value="0.22" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/SpeakSure_Capstone/app/src/main/res/layout/upload.xml" value="0.171875" />
       </map>

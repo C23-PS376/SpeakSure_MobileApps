@@ -6,44 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:ignore="ExtraText">
-
-    <RelativeLayout
-        android:id="@+id/search_bar"
-        android:layout_width="380dp"
-        android:layout_height="56dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:layout_marginStart="18dp"
-        android:background="@drawable/search_bar"
-        android:clipToOutline="true">
-
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="9dp"
-            android:foregroundGravity="center"
-            android:src="@drawable/ic_baseline_account_circle_24" />
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/ed_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:hint="@string/searchbar_hint" />
-    </RelativeLayout>
+    tools:ignore="ExtraText"
+    tools:context=".ui.dashboard.HomepageActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -59,7 +27,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+            class="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
