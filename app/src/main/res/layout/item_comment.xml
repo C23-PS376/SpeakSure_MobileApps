@@ -73,11 +73,26 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <Button
+            android:id="@+id/btn_play_thread"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_constraintTop_toBottomOf="@id/header_thread"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/seed"
+            android:text="@string/duration"
+            android:textColor="@color/md_theme_light_onPrimary"
+            app:icon="@drawable/ic_play_arrow_fill0_wght400_grad0_opsz48"
+            app:iconTint="@color/md_theme_light_onPrimary"
+            card_view:layout_constraintStart_toStartOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp">
 
             <TextView
@@ -92,79 +107,6 @@
                 card_view:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Media -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="194dp"
-            app:srcCompat="@drawable/ic_baseline_insert_photo_24"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/content_description_media" />
-
-
-
-        <!-- Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btn_up"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_baseline_arrow_drop_up_24"
-                android:contentDescription="@string/image"/>
-
-            <com.google.android.material.button.MaterialButton
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:text="@string/JumlahUp" />
-
-            <ImageButton
-                android:id="@+id/btn_down"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                android:contentDescription="@string/image"/>
-
-            <ImageButton
-                android:id="@+id/btn_comment"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48"
-                android:contentDescription="@string/image"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="65dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="0dp"
-                android:text="@string/jumlah_comment"
-                style="?attr/borderlessButtonStyle"
-                />
-
-            <Button
-                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                android:id="@+id/btn_play_thread"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:backgroundTint="@color/seed"
-                android:textColor="@color/md_theme_light_onPrimary"
-                app:icon="@drawable/ic_play_arrow_fill0_wght400_grad0_opsz48"
-                app:iconTint="@color/md_theme_light_onPrimary"
-                android:text="@string/duration"/>
-        </LinearLayout>
 
     </LinearLayout>
 
