@@ -40,4 +40,5 @@
     <string name="attach">Attach Voice</string>
     <string name="record">Record Voice</string>
     <string name="masukkan_teks">Masukkan teks</string>
+    <string name="stop_record">Stop Record</string>
 </resources>

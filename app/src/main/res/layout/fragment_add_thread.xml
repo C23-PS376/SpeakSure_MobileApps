@@ -32,7 +32,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input"
+            android:id="@+id/text_input_layout"
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,6 +49,7 @@
             app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/masukkan_teks"
@@ -62,17 +63,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/record"
-            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             app:icon="@drawable/baseline_mic_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_attach"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+            app:layout_constraintVertical_bias="0.0"
+            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
         </com.google.android.material.button.MaterialButton>
 
@@ -81,18 +82,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/attach"
-            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             app:icon="@drawable/baseline_attach_file_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_record"
-            app:layout_constraintTop_toBottomOf="@+id/text_input"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+            app:layout_constraintVertical_bias="0.0"
+            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
         </com.google.android.material.button.MaterialButton>
 
@@ -100,15 +101,17 @@
             android:id="@+id/btn_upload"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
 
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/upload"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btn_attach"
             app:layout_constraintStart_toStartOf="@+id/btn_record"
-            app:layout_constraintTop_toBottomOf="@+id/btn_record"
-            app:layout_constraintVertical_bias="0.22000003"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+            app:layout_constraintVertical_bias="0.41000003"
             tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
         </com.google.android.material.button.MaterialButton>
