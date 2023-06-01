@@ -6,10 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,12 +21,14 @@ import androidx.fragment.app.Fragment
 import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.databinding.FragmentAddThreadBinding
 import com.google.android.material.textfield.TextInputEditText
+import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
 
 private const val CAMERA_REQUEST_CODE = 1
 private const val GALLERY_REQUEST_CODE = 2
 private const val RECORD_AUDIO_REQUEST_CODE =3
+private const val WRITE_EXTERNAL_STORAGE_REQUEST_CODE =4
 
 class AddThreadFragment : Fragment() {
     private lateinit var textInputEditText: TextInputEditText
@@ -34,6 +38,9 @@ class AddThreadFragment : Fragment() {
     @Suppress("DEPRECATION")
     private val recorder = MediaRecorder()
     private var outputFilePath: String? = null
+
+    private var player: MediaPlayer? = null
+    private var isPlaying = false
 
 
 
@@ -58,12 +65,22 @@ class AddThreadFragment : Fragment() {
             @Suppress("DEPRECATION")
             requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), RECORD_AUDIO_REQUEST_CODE)
         }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Jika izin belum diberikan, minta izin WRITE_EXTERNAL_STORAGE secara dinamis
+            @Suppress("DEPRECATION")
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
+        }
 
 
-        outputFilePath = requireContext().externalCacheDir?.absolutePath + "/recorded_audio.3gp"
 
 
+        initializeFragment()
 
+
+        return rootView
+    }
+
+    private fun initializeFragment() {
         setupAudioRecorder()
 
         binding.btnRecord.setOnClickListener {
@@ -74,14 +91,115 @@ class AddThreadFragment : Fragment() {
             }
         }
 
-
-
-        return rootView
+        binding.iconClose.setOnClickListener {
+            deleteRecordedFile()
+            resetButtonState()
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+
+    private fun setupAudioRecorder() {
+        deleteRecordedFile()
+        outputFilePath = requireContext().externalCacheDir?.absolutePath + "/recorded_audio.3gp" // Perbarui outputFilePath
+        recorder.apply {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            setOutputFile(outputFilePath)
+        }
+    }
+
+    private fun startRecording() {
+        try {
+            recorder.prepare()
+            recorder.start()
+            isRecording = true
+            // Ubah tampilan tombol saat sedang merekam
+            binding.btnRecord.setText(R.string.stop_record)
+            binding.btnRecord.setIconResource(R.drawable.baseline_stop_24)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            // Handle error saat gagal memulai rekaman
+        }
+    }
+
+    private fun stopRecording() {
+        recorder.stop()
+        isRecording = false
+        binding.btnRecord.setText(R.string.play)
+        binding.btnRecord.setIconResource(R.drawable.baseline_play_arrow_24)
+        binding.fileBox.visibility = View.VISIBLE
+
+        Log.d("LOG_TAG", "Stop recording called")
+        Log.d("LOG_TAG", "isPlaying: $isPlaying")
+
+        binding.btnRecord.setOnClickListener {
+            isPlaying=false
+            Log.d("LOG_TAG", "btnRecord clicked")
+            if (isPlaying) {
+                Log.e("LOG_TAG", "masuk ke stopPLaying")
+                stopPlaying()
+            } else {  // Add this condition to prevent automatic startPlaying() when recording is stopped
+                Log.e("LOG_TAG", "masuk ke startPLaying")
+                startPlaying()
+            }
+        }
+    }
+
+    private fun startPlaying() {
+        isPlaying =true
+        releaseMediaPlayer()
+        player = MediaPlayer().apply {
+            try {
+                setDataSource(outputFilePath)
+                prepare()
+                Log.d("LOG_TAG", "MediaPlayer prepared")
+                start()
+                Log.d("LOG_TAG", "MediaPlayer started")
+            } catch (e: IOException) {
+                Log.e("LOG_TAG", "$e failed diisni")
+            }
+        }
+    }
+
+    private fun stopPlaying() {
+        player?.release()
+        player = null
+    }
+
+
+    private fun releaseMediaPlayer() {
+        player?.apply {
+            stop()
+            release()
+        }
+        player = null
+    }
+
+    private fun resetButtonState() {
+        isRecording = false
+        recorder.reset()
+        setupAudioRecorder()
+        binding.btnRecord.setText(R.string.record)
+        binding.btnRecord.setIconResource(R.drawable.baseline_mic_24)
+        binding.fileBox.visibility = View.GONE
+        releaseMediaPlayer()
+    }
+
+    private fun deleteRecordedFile() {
+        val file = File(outputFilePath.toString())
+        if (file.exists()) {
+            val deleted = file.delete()
+            if (deleted) {
+                Log.d("LOG_TAG", "File deleted successfully")
+                initializeFragment()
+            } else {
+                Log.d("LOG_TAG", "Failed to delete file")
+            }
+        } else {
+            Log.d("LOG_TAG", "File does not exist")
+        }
     }
 
     // Method untuk mendapatkan teks dari TextInputEditText
@@ -164,36 +282,6 @@ class AddThreadFragment : Fragment() {
         }
     }
 
-    private fun setupAudioRecorder() {
-        recorder.apply {
-            setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-            setOutputFile(outputFilePath)
-        }
-    }
-
-    private fun startRecording() {
-        try {
-            recorder.prepare()
-            recorder.start()
-            isRecording = true
-            // Ubah tampilan tombol saat sedang merekam
-            binding.btnRecord.setText(R.string.stop_record)
-            binding.btnRecord.setIconResource(R.drawable.baseline_stop_24)
-        } catch (e: IOException) {
-            e.printStackTrace()
-            // Handle error saat gagal memulai rekaman
-        }
-    }
-
-    private fun stopRecording() {
-        recorder.stop()
-        recorder.reset()
-        isRecording = false
-        binding.btnRecord.setText(R.string.record)
-        binding.btnRecord.setIconResource(R.drawable.baseline_mic_24)
-    }
 
     @Deprecated("Deprecated in Java")
     @Suppress("DEPRECATION")
@@ -209,9 +297,8 @@ class AddThreadFragment : Fragment() {
         }
     }
 
-
-
-
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
