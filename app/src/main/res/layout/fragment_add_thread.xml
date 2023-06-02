@@ -7,17 +7,52 @@
     android:id="@+id/addThreadFragment"
     tools:context=".ui.addthread.AddThreadFragment">
 
+    <RelativeLayout
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/search_bar"
+        android:clipToOutline="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="9dp"
+            android:foregroundGravity="center"
+            android:src="@drawable/ic_baseline_account_circle_24" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/ed_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:hint="@string/searchbar_hint" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="101dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/content_description_media"
@@ -26,27 +61,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input"
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.0"
-            app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
+            app:layout_constraintVertical_bias="0.0">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -61,18 +93,19 @@
             android:id="@+id/btn_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/text_input"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/record"
-            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             app:icon="@drawable/baseline_mic_24"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_attach"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
         </com.google.android.material.button.MaterialButton>
 
@@ -80,19 +113,18 @@
             android:id="@+id/btn_attach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_below="@+id/text_input"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/attach"
-            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             app:icon="@drawable/baseline_attach_file_24"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_record"
             app:layout_constraintTop_toBottomOf="@+id/text_input"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
         </com.google.android.material.button.MaterialButton>
 
@@ -100,11 +132,14 @@
             android:id="@+id/btn_upload"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-
+            android:layout_below="@+id/btn_record"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="100dp"
             android:layout_marginBottom="16dp"
             android:text="@string/upload"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btn_attach"
             app:layout_constraintStart_toStartOf="@+id/btn_record"
             app:layout_constraintTop_toBottomOf="@+id/btn_record"
@@ -114,7 +149,7 @@
         </com.google.android.material.button.MaterialButton>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.speaksure_capstone.ui.profile
+package com.example.speaksure_capstone.ui.dashboard
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -9,15 +9,19 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.speaksure_capstone.data.ThreadRepository
 import com.example.speaksure_capstone.di.Injection
+import com.example.speaksure_capstone.response.ListThreads
 
-class ProfileViewModel(threadRepository: ThreadRepository): ViewModel() {
+class HomeViewModel(threadRepository: ThreadRepository): ViewModel() {
+
+    val thread: LiveData<PagingData<ListThreads>> =
+        threadRepository.getThread().cachedIn(viewModelScope)
 
 
-    class ProfileViewModelFactory(private val token: String, private val context: Context) : ViewModelProvider.Factory {
+    class HomeViewModelFactory(private val token: String, private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return ProfileViewModel(Injection.provideRepository(token,context)) as T
+                return HomeViewModel(Injection.provideRepository(token,context)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

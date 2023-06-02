@@ -1,11 +1,17 @@
 package com.example.speaksure_capstone.ui.dashboard
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.databinding.ActivityHomepageBinding
+import com.example.speaksure_capstone.ui.login.LoginActivity
 
 class HomepageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomepageBinding
@@ -15,9 +21,15 @@ class HomepageActivity : AppCompatActivity() {
         binding = ActivityHomepageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishAffinity()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
-        val navController = navHostFragment?.navController
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
 
         if (navController != null) {
             val bottomNavigationView = binding.bottomNavigation
