@@ -16,11 +16,12 @@
             android:id="@+id/btn_logout"
             android:layout_width="120dp"
             android:layout_height="50dp"
+            android:layout_above="@+id/card"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:backgroundTint="@color/md_theme_light_error"
             android:fontFamily="@font/poppins"
             android:text="@string/logout" />
@@ -28,7 +29,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="wrap_content"
-            android:layout_height="448dp"
+            android:layout_height="370dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:layout_marginStart="15dp"
@@ -53,18 +54,20 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="120dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="120dp"
                     android:src="@drawable/ic_baseline_account_circle_24" />
 
                 <TextView
                     android:id="@+id/Name"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_photoprofile"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="142dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="-2dp"
                     android:fontFamily="@font/poppins"
                     android:text="@string/username"
                     android:textAlignment="center" />
@@ -74,11 +77,11 @@
                     style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_introduction"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="100dp"
-                    android:layout_marginTop="371dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="100dp"
                     android:backgroundTint="@color/seed"
                     android:text="@string/duration"
@@ -90,60 +93,60 @@
                     android:id="@+id/tv_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_thread"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="175dp"
+                    android:layout_marginTop="15dp"
                     android:text="@string/comment" />
 
                 <TextView
                     android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_comment"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="138dp"
+                    android:layout_marginTop="15dp"
                     android:text="Logged in as %1$s" />
 
                 <TextView
                     android:id="@+id/tv_jlh_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_jlh_thread"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="110dp"
-                    android:layout_marginBottom="175dp"
+                    android:layout_marginTop="15dp"
                     android:text="%1$s Comment" />
 
                 <TextView
                     android:id="@+id/tv_introduction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_email"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="101dp"
+                    android:layout_marginTop="15dp"
                     android:text="Hi, i'm %1$s" />
 
                 <TextView
                     android:id="@+id/tv_thread"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/Name"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="215dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/thread" />
 
                 <TextView
                     android:id="@+id/tv_jlh_thread"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/Name"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:layout_marginStart="110dp"
-                    android:layout_marginTop="215dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/_1_s_thread" />
 
             </RelativeLayout>
