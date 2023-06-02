@@ -7,52 +7,17 @@
     android:id="@+id/addThreadFragment"
     tools:context=".ui.addthread.AddThreadFragment">
 
-    <RelativeLayout
-        android:id="@+id/search_bar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/search_bar"
-        android:clipToOutline="true">
 
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="9dp"
-            android:foregroundGravity="center"
-            android:src="@drawable/ic_baseline_account_circle_24" />
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/ed_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:hint="@string/searchbar_hint" />
-    </RelativeLayout>
-
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="101dp"
+            android:layout_marginTop="128dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/content_description_media"
@@ -61,26 +26,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
 
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input"
+            android:id="@+id/text_input_layout"
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/masukkan_teks"
@@ -93,17 +62,16 @@
             android:id="@+id/btn_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_input"
-            android:layout_alignParentStart="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/record"
             app:icon="@drawable/baseline_mic_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_attach"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
             app:layout_constraintVertical_bias="0.0"
             tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
@@ -113,16 +81,17 @@
             android:id="@+id/btn_attach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_input"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/attach"
             app:icon="@drawable/baseline_attach_file_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toBottomOf="@+id/text_input"
+            app:layout_constraintStart_toEndOf="@+id/btn_record"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
             app:layout_constraintVertical_bias="0.0"
             tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
@@ -132,24 +101,61 @@
             android:id="@+id/btn_upload"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_record"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="100dp"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/upload"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btn_attach"
             app:layout_constraintStart_toStartOf="@+id/btn_record"
-            app:layout_constraintTop_toBottomOf="@+id/btn_record"
-            app:layout_constraintVertical_bias="0.22000003"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+            app:layout_constraintVertical_bias="0.64"
             tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
         </com.google.android.material.button.MaterialButton>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/file_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#f49423"
+            android:padding="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btn_upload"
+            app:layout_constraintEnd_toEndOf="@+id/btn_attach"
+            app:layout_constraintStart_toStartOf="@+id/btn_record"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/icon_close"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Close Icon"
+                android:src="@drawable/baseline_close_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/file_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="example.txt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/icon_close"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

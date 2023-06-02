@@ -39,6 +39,9 @@
     <string name="username">Username</string>
     <string name="upload">Upload</string>
     <string name="attach">Attach Voice</string>
+    <string name="play">Play Voice</string>
     <string name="record">Record Voice</string>
     <string name="masukkan_teks">Masukkan teks</string>
+    <string name="stop_record">Stop Record</string>
+    <string name="delete_voice">Delete Voice</string>
 </resources>
