@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val SHARED_PREFERENCES = "shared_preferences"
 //        const val NAME = "name"
-//        const val USER_ID = "user_id"
+        const val USER_ID = "user_id"
         const val TOKEN = "token"
         const val ISLOGGEDIN = "isloggedin"
     }
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.data?.get(0)?.apply {
-                            validateLogin(accessToken.toString())
+                            validateLogin(id,accessToken.toString())
                         }
                         Toast.makeText(this@LoginActivity, "Login Success", Toast.LENGTH_SHORT)
                             .show()
@@ -82,10 +82,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
 
 
-    private fun validateLogin(/*userId: String, name: String,*/ token: String) {
+    private fun validateLogin(userId: String,  token: String) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        /*editor.putString(NAME, name)
-        editor.putString(USER_ID, userId)*/
+        /*editor.putString(NAME, name)*/
+        editor.putString(USER_ID, userId)
         editor.putString(TOKEN, token)
         editor.putBoolean(ISLOGGEDIN, true)
         editor.apply()

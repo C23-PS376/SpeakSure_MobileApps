@@ -10,6 +10,7 @@
 
     <TextView
         android:id="@+id/tv_register"
+        app:fontFamily="@font/poppins"
         android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -24,6 +25,7 @@
 
     <TextView
         android:id="@+id/selamat_dat"
+        app:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -113,10 +115,12 @@
 
     <ProgressBar
         android:id="@+id/login_progressBar"
-        android:visibility="gone"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="23dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="388dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.528"
