@@ -27,11 +27,11 @@
                 android:layout_marginStart="16dp"
                 android:contentDescription="@string/image"
                 android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_account_circle_24"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintVertical_bias="1.0"
-                tools:src="@tools:sample/avatars" />
+                card_view:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/Name"
@@ -47,27 +47,15 @@
                 card_view:layout_constraintVertical_bias="0.428" />
 
             <TextView
-                android:id="@+id/time_thread"
+                android:id="@+id/date_thread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/time"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?android:attr/textColorSecondary"
-                card_view:layout_constraintStart_toEndOf="@+id/iv_photoprofile"
-                card_view:layout_constraintTop_toBottomOf="@id/Name" />
-
-            <TextView
-                android:id="@+id/date_thread"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
                 android:text="@string/date"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?android:attr/textColorSecondary"
-                card_view:layout_constraintStart_toEndOf="@+id/time_thread"
+                card_view:layout_constraintStart_toEndOf="@+id/iv_photoprofile"
                 card_view:layout_constraintTop_toBottomOf="@+id/Name" />
 
 
@@ -81,6 +69,7 @@
             android:layout_marginBottom="20dp">
 
             <TextView
+                android:id="@+id/description"
                 android:layout_width="369dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -94,16 +83,16 @@
 
         <!-- Media -->
         <ImageView
+            android:id="@+id/image_thread"
             android:layout_width="match_parent"
-            android:layout_height="194dp"
+            android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_baseline_insert_photo_24"
             android:scaleType="centerCrop"
             android:contentDescription="@string/content_description_media" />
 
 
-
         <!-- Buttons -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -111,60 +100,74 @@
 
             <ImageButton
                 android:id="@+id/btn_up"
-                android:layout_width="40dp"
+                android:layout_width="20dp"
                 android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="0dp"
                 android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_baseline_arrow_drop_up_24"
-                android:contentDescription="@string/image"/>
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_baseline_arrow_drop_up_24" />
 
-            <com.google.android.material.button.MaterialButton
+            <TextView
+                android:id="@+id/jlh_like"
                 style="?attr/borderlessButtonStyle"
-                android:layout_width="55dp"
+                android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:text="@string/JumlahUp" />
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/btn_up"
+                android:text="@string/JumlahUp"
+                app:layout_constraintStart_toEndOf="@id/btn_up" />
 
             <ImageButton
                 android:id="@+id/btn_down"
-                android:layout_width="40dp"
+                android:layout_width="20dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/jlh_like"
                 android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                android:contentDescription="@string/image"/>
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24" />
 
             <ImageButton
                 android:id="@+id/btn_comment"
-                android:layout_width="40dp"
+                android:layout_width="20dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/btn_down"
                 android:backgroundTint="@color/cardview_light_background"
-                android:src="@drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48"
-                android:contentDescription="@string/image"/>
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_chat_bubble_fill0_wght400_grad0_opsz48" />
 
-            <com.google.android.material.button.MaterialButton
+            <TextView
+                android:id="@+id/jlh_comment"
+                style="?attr/borderlessButtonStyle"
                 android:layout_width="65dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="0dp"
-                android:text="@string/jumlah_comment"
-                style="?attr/borderlessButtonStyle"
-                />
+                android:layout_toEndOf="@+id/btn_comment"
+                android:text="@string/jumlah_comment" />
 
             <Button
-                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                 android:id="@+id/btn_play_thread"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/jlh_comment"
                 android:backgroundTint="@color/seed"
+                android:text="@string/duration"
                 android:textColor="@color/md_theme_light_onPrimary"
                 app:icon="@drawable/ic_play_arrow_fill0_wght400_grad0_opsz48"
-                app:iconTint="@color/md_theme_light_onPrimary"
-                android:text="@string/duration"/>
-        </LinearLayout>
+                app:iconTint="@color/md_theme_light_onPrimary" />
+        </RelativeLayout>
 
     </LinearLayout>
 
