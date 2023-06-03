@@ -77,8 +77,6 @@ class ProfileFragment : Fragment() {
         binding.tvEmail.text = getString(R.string._1_s_email,profile.data?.email)
         binding.tvIntroduction.text = getString(R.string._1_s_greeting,profile.data?.name)
         binding.btnPlayThread.text = profile.data?.audioLength
-//        binding.tvFollowers.text = ("Followers "+ Name?.followers.toString())
-//        binding.tvFollowing.text = ("Following "+ Name?.following.toString())
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.speaksure_capstone.network
 
+import com.example.speaksure_capstone.response.DetailResponse
 import com.example.speaksure_capstone.response.ListThreadResponse
 import com.example.speaksure_capstone.response.LoginRegisterResponse
 import com.example.speaksure_capstone.response.ProfileResponse
@@ -35,5 +36,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("user_id") id: String
     ): Call<ProfileResponse>
+
+    @GET("threads/{thread_id}")
+    fun getDetail(
+        @Header("Authorization") token: String,
+        @Path("thread_id") id: String
+    ): Call<DetailResponse>
 
 }

@@ -1,11 +1,9 @@
 package com.example.speaksure_capstone.ui.login
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +22,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         const val SHARED_PREFERENCES = "shared_preferences"
-//        const val NAME = "name"
         const val USER_ID = "user_id"
         const val TOKEN = "token"
         const val ISLOGGEDIN = "isloggedin"
@@ -84,7 +81,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun validateLogin(userId: String,  token: String) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        /*editor.putString(NAME, name)*/
         editor.putString(USER_ID, userId)
         editor.putString(TOKEN, token)
         editor.putBoolean(ISLOGGEDIN, true)
