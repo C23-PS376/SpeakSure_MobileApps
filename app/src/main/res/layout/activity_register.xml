@@ -17,6 +17,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="68dp"
         android:gravity="top"
+        app:fontFamily="@font/poppins"
         android:lineSpacingExtra="2sp"
         android:text="@string/register"
         android:textAppearance="@style/register"
@@ -33,7 +34,8 @@
         android:gravity="top"
         android:lineSpacingExtra="-5sp"
         android:text="@string/selamat_dat"
-        android:textAppearance="@style/selamat_dat" />
+        android:textAppearance="@style/selamat_dat"
+        app:fontFamily="@font/poppins" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="?attr/textInputFilledStyle"

@@ -13,6 +13,9 @@ data class LoginRegisterResponse(
 
 data class DataItem(
 
+	@field:SerializedName("id")
+	val id: String,
+
 	@field:SerializedName("access_token")
 	val accessToken: String? = null
 )

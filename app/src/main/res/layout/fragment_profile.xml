@@ -107,7 +107,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"
-                    android:text="Logged in as %1$s" />
+                    android:text="@string/_1_s_email" />
 
                 <TextView
                     android:id="@+id/tv_jlh_comment"
@@ -117,7 +117,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="110dp"
                     android:layout_marginTop="15dp"
-                    android:text="%1$s Comment" />
+                    android:text="@string/_1_s_comment" />
 
                 <TextView
                     android:id="@+id/tv_introduction"
@@ -127,7 +127,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"
-                    android:text="Hi, i'm %1$s" />
+                    android:text="@string/_1_s_greeting" />
 
                 <TextView
                     android:id="@+id/tv_thread"

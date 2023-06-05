@@ -1,5 +1,7 @@
 package com.example.speaksure_capstone.adapter
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.speaksure_capstone.databinding.ItemThreadBinding
 import com.example.speaksure_capstone.response.ListThreads
+import com.example.speaksure_capstone.ui.detail.DetailActivity
 
 class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.MyViewHolder>(DiffCallback) {
 
@@ -35,11 +38,11 @@ class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.My
             binding.jlhLike.text = data.likesCount
             binding.jlhComment.text = data.commentsCount
             binding.btnPlayThread.text = data.audioLength
-//            binding.root.setOnClickListener{
-//                val intent = Intent(binding.root.context, DetailStoryActivity::class.java )
-//                intent.putExtra(DetailStoryActivity.EXTRA_ID, data.id)
-//                binding.root.context.startActivity(intent)
-//            }
+            binding.root.setOnClickListener{
+                val intent = Intent(binding.root.context, DetailActivity::class.java )
+                intent.putExtra(DetailActivity.ID_THREAD, data.id)
+                binding.root.context.startActivity(intent)
+            }
         }
     }
 

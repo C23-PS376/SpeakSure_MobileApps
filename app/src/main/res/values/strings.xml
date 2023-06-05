@@ -36,6 +36,9 @@
     <string name="comment">Comment :</string>
     <string name="thread">Thread :</string>
     <string name="_1_s_thread">%1$s Thread</string>
+    <string name="_1_s_comment">%1$s Comment</string>
+    <string name="_1_s_email">Logged in as %1$s</string>
+    <string name="_1_s_greeting">Hi, im %1$s</string>
     <string name="username">Username</string>
     <string name="upload">Upload</string>
     <string name="attach">Attach Voice</string>
