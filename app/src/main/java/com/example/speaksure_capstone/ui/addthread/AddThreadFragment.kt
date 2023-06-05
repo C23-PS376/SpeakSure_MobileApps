@@ -23,7 +23,6 @@ import com.example.speaksure_capstone.databinding.FragmentAddThreadBinding
 import com.google.android.material.textfield.TextInputEditText
 import java.io.File
 import java.io.FileNotFoundException
-import java.io.FileOutputStream
 import java.io.IOException
 
 private const val CAMERA_REQUEST_CODE = 1
@@ -31,6 +30,7 @@ private const val GALLERY_REQUEST_CODE = 2
 private const val RECORD_AUDIO_REQUEST_CODE =3
 private const val WRITE_EXTERNAL_STORAGE_REQUEST_CODE =4
 private const val PICK_AUDIO_REQUEST_CODE = 5
+private const val READ_EXTERNAL_STORAGE_REQUEST_CODE = 6
 
 class AddThreadFragment : Fragment() {
     private lateinit var textInputEditText: TextInputEditText
@@ -40,7 +40,6 @@ class AddThreadFragment : Fragment() {
     @Suppress("DEPRECATION")
     private val recorder = MediaRecorder()
     private var outputFilePath: String? = null
-    private var attachOutputFilePath: String? = null
 
     private var player: MediaPlayer? = null
     private var isPlaying = false
@@ -58,21 +57,9 @@ class AddThreadFragment : Fragment() {
         val rootView = binding.root
 
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            // Jika izin belum diberikan, minta izin RECORD_AUDIO secara dinamis
-            @Suppress("DEPRECATION")
-            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), RECORD_AUDIO_REQUEST_CODE)
-        }
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            // Jika izin belum diberikan, minta izin WRITE_EXTERNAL_STORAGE secara dinamis
-            @Suppress("DEPRECATION")
-            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
-        }
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            // Jika izin belum diberikan, minta izin WRITE_EXTERNAL_STORAGE secara dinamis
-            @Suppress("DEPRECATION")
-            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PICK_AUDIO_REQUEST_CODE)
-        }
+
+
+        permission()
 
         // Inisialisasi TextInputEditText
         textInputEditText = binding.textInput
@@ -84,6 +71,7 @@ class AddThreadFragment : Fragment() {
 
 
         initializeFragment()
+
 
         binding.btnUpload.setOnClickListener{
             uploadThread()
@@ -104,38 +92,9 @@ class AddThreadFragment : Fragment() {
             }
         }
 
-        binding.btnAttach.setOnClickListener {
-            attachAudio()
-        }
-
         binding.iconClose.setOnClickListener {
             deleteRecordedFile()
             resetButtonState()
-        }
-    }
-
-    private fun attachAudio(){
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "audio/*"
-        }
-        @Suppress("DEPRECATION")
-        startActivityForResult(intent, PICK_AUDIO_REQUEST_CODE)
-
-        binding.btnAttach.setText(R.string.play)
-        binding.btnAttach.setIconResource(R.drawable.baseline_play_arrow_24)
-        binding.fileBox.visibility = View.VISIBLE
-
-        binding.btnAttach.setOnClickListener {
-            isPlaying=false
-            Log.d("LOG_TAG", "btnRecord clicked")
-            if (isPlaying) {
-
-                stopPlaying()
-            } else {  // Add this condition to prevent automatic startPlaying() when recording is stopped
-                startPlayingAttach()
-            }
-
         }
     }
 
@@ -188,21 +147,7 @@ class AddThreadFragment : Fragment() {
         }
     }
 
-    private fun startPlayingAttach() {
-        isPlaying =true
-        releaseMediaPlayer()
-        player = MediaPlayer().apply {
-            try {
-                setDataSource(attachOutputFilePath)
-                prepare()
-                Log.d("LOG_TAG", "MediaPlayer prepared")
-                start()
-                Log.d("LOG_TAG", "MediaPlayer started")
-            } catch (e: IOException) {
-                Log.e("LOG_TAG", "$e failed diisni")
-            }
-        }
-    }
+
 
     private fun startPlaying(outputFilePath : String) {
         isPlaying =true
@@ -341,26 +286,145 @@ class AddThreadFragment : Fragment() {
                 }
             }
         }
-        if (requestCode == PICK_AUDIO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        /*if (requestCode == PICK_AUDIO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
-                Log.e("uri","$uri")
                 getAudioFile = getFileFromUri(uri)
                 attachOutputFilePath = getFilePathFromUri(uri)
+                Log.e("uri", "$uri")
+                Log.e("getAudioFile", "$getAudioFile")
+                Log.e("attachOutputFilePath", "$attachOutputFilePath")
                 // Lakukan tindakan selanjutnya dengan selectedAudioFile
             }
+        }*/
+    }
+
+
+
+
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RECORD_AUDIO_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Izin diberikan, panggil kembali setupAudioRecorder()
+                setupAudioRecorder()
+            } else {
+                // Izin ditolak, tangani kasus ketika pengguna tidak memberikan izin
+            }
+        }
+    }
+
+    private fun permission(){
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            // Jika izin belum diberikan, minta izin RECORD_AUDIO secara dinamis
+            @Suppress("DEPRECATION")
+            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), RECORD_AUDIO_REQUEST_CODE)
+        }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            @Suppress("DEPRECATION")
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
+        }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            @Suppress("DEPRECATION")
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PICK_AUDIO_REQUEST_CODE)
+        }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            @Suppress("DEPRECATION")
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_EXTERNAL_STORAGE_REQUEST_CODE)
         }
 
     }
 
-    private fun getFilePathFromUri(uri: Uri): String? {
-        val file = File(uri.path.toString())
-        return if (file.exists()) {
-            file.absolutePath
-        } else {
-            // Lakukan pengolahan tambahan jika file tidak ditemukan
-            null
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    /*companion object{
+        private var attachOutputFilePath: String? = null
+    }
+*/
+
+    /*private fun attachAudio(){
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "audio//"
+        }
+        @Suppress("DEPRECATION")
+        startActivityForResult(intent, PICK_AUDIO_REQUEST_CODE)
+
+        binding.btnAttach.setText(R.string.play)
+        binding.btnAttach.setIconResource(R.drawable.baseline_play_arrow_24)
+        binding.fileBox.visibility = View.VISIBLE
+
+        binding.btnAttach.setOnClickListener {
+            isPlaying=false
+            Log.d("LOG_TAG", "$attachOutputFilePath")
+            if (isPlaying) {
+
+                stopPlaying()
+            } else {
+                permission()
+                startPlayingAttach()
+            }
         }
     }
+    private fun startPlayingAttach() {
+        isPlaying =true
+        Log.e("uri","$attachOutputFilePath")
+        releaseMediaPlayer()
+        player = MediaPlayer().apply {
+            try {
+                setDataSource(attachOutputFilePath)
+                prepare()
+                Log.d("LOG_TAG", "MediaPlayer prepared")
+                start()
+                Log.d("LOG_TAG", "MediaPlayer started")
+            } catch (e: IOException) {
+                Log.e("LOG_TAG", "$e failed diisni")
+            }
+        }
+    }*/
+
+    /*private fun getFilePathFromUri(uri: Uri): String? {
+        if (DocumentsContract.isDocumentUri(requireContext(), uri)) {
+            if (isExternalStorageDocument(uri)) {
+                val docId = DocumentsContract.getDocumentId(uri)
+                val split = docId.split(":").toTypedArray()
+                if (split.size == 2) {
+                    val type = split[0]
+                    if ("primary".equals(type, ignoreCase = true)) {
+                        return "${Environment.getExternalStorageDirectory()}/${split[1]}"
+                    }
+                }
+            } else if (isDownloadsDocument(uri)) {
+                val id = DocumentsContract.getDocumentId(uri)
+                val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), id.toLong())
+                return getDataColumn(requireContext(), contentUri, null, null)
+            } else if (isMediaDocument(uri)) {
+                val docId = DocumentsContract.getDocumentId(uri)
+                val split = docId.split(":").toTypedArray()
+                val type = split[0]
+                var contentUri: Uri? = null
+                when (type) {
+                    "image" -> contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    "audio" -> contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                    "video" -> contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                }
+                val selection = "_id=?"
+                val selectionArgs = arrayOf(split[1])
+                return contentUri?.let {
+                    getDataColumn(requireContext(),
+                        it, selection, selectionArgs)
+                }
+            }
+        } else if ("content".equals(uri.scheme, ignoreCase = true)) {
+            return getDataColumn(requireContext(), uri, null, null)
+        } else if ("file".equals(uri.scheme, ignoreCase = true)) {
+            return uri.path
+        }
+        return null   }
 
     private fun getFileFromUri(uri: Uri): File? {
         val context = requireContext()
@@ -380,23 +444,36 @@ class AddThreadFragment : Fragment() {
         return null
     }
 
+    private fun isExternalStorageDocument(uri: Uri): Boolean {
+        return "com.android.externalstorage.documents" == uri.authority
+    }
 
-    @Deprecated("Deprecated in Java")
-    @Suppress("DEPRECATION")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == RECORD_AUDIO_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Izin diberikan, panggil kembali setupAudioRecorder()
-                setupAudioRecorder()
-            } else {
-                // Izin ditolak, tangani kasus ketika pengguna tidak memberikan izin
+    private fun isDownloadsDocument(uri: Uri): Boolean {
+        return "com.android.providers.downloads.documents" == uri.authority
+    }
+
+    private fun isMediaDocument(uri: Uri): Boolean {
+        return "com.android.providers.media.documents" == uri.authority
+    }
+
+    private fun getDataColumn(
+        context: Context,
+        uri: Uri,
+        selection: String?,
+        selectionArgs: Array<String>?
+    ): String? {
+        var cursor: Cursor? = null
+        val column = "_data"
+        val projection = arrayOf(column)
+        try {
+            cursor = context.contentResolver.query(uri, projection, selection, selectionArgs, null)
+            if (cursor != null && cursor.moveToFirst()) {
+                val columnIndex = cursor.getColumnIndexOrThrow(column)
+                return cursor.getString(columnIndex)
             }
+        } finally {
+            cursor?.close()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+        return null
+    }*/
 }
