@@ -47,4 +47,6 @@
     <string name="masukkan_teks">Masukkan teks</string>
     <string name="stop_record">Stop Record</string>
     <string name="delete_voice">Delete Voice</string>
+    <string name="titlethread">Title</string>
+    <string name="description">Description</string>
 </resources>

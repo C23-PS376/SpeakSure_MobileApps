@@ -8,7 +8,7 @@
     tools:context=".ui.addthread.AddThreadFragment">
 
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -33,6 +33,31 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_input_layout"
+            style="?attr/textInputFilledStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/text_input_layout"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/title_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/titlethread"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout"
@@ -41,21 +66,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.45">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/masukkan_teks"
+                android:hint="@string/description"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -67,36 +91,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_input_layout"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="159dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/record"
             app:icon="@drawable/baseline_mic_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_attach"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
-            app:layout_constraintVertical_bias="0.0"
-            tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
-
-        </com.google.android.material.button.MaterialButton>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_attach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_input_layout"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/attach"
-            app:icon="@drawable/baseline_attach_file_24"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_record"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
             app:layout_constraintVertical_bias="0.0"
             tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
@@ -107,19 +111,19 @@
             android:id="@+id/btn_upload"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/file_box"
+            android:layout_below="@+id/btn_record"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/upload"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/btn_attach"
+            app:layout_constraintEnd_toEndOf="@+id/btn_record"
             app:layout_constraintStart_toStartOf="@+id/btn_record"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
-            app:layout_constraintVertical_bias="0.64"
+            app:layout_constraintTop_toBottomOf="@+id/btn_record"
+            app:layout_constraintVertical_bias="0.0"
             tools:style="@style/Widget.MaterialComponents.Button.UnelevatedButton">
 
         </com.google.android.material.button.MaterialButton>
@@ -128,19 +132,20 @@
             android:id="@+id/file_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_attach"
+            android:layout_below="@+id/text_input_layout"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
             android:background="#f49423"
             android:padding="8dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/btn_upload"
-            app:layout_constraintEnd_toEndOf="@+id/btn_attach"
-            app:layout_constraintStart_toStartOf="@+id/btn_record"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+            app:layout_constraintVertical_bias="0.0">
 
             <ImageView
                 android:id="@+id/icon_close"
@@ -149,6 +154,7 @@
                 android:contentDescription="Close Icon"
                 android:src="@drawable/baseline_close_24"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/file_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -156,17 +162,85 @@
                 android:id="@+id/file_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="example.txt"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/icon_close"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.523" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_upload"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_record"
+            app:layout_constraintEnd_toEndOf="@+id/btn_record"
+            app:layout_constraintStart_toStartOf="@+id/btn_record"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+            app:layout_constraintVertical_bias="1.0"
+            app:singleSelection="true">
 
-    </RelativeLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button1"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="Politics" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button2"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="Games" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button3"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="Anime" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button4"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="K-Pop" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button5"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="Sports" />
+
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

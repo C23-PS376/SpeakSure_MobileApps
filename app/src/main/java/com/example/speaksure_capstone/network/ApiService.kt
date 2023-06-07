@@ -1,9 +1,8 @@
 package com.example.speaksure_capstone.network
 
-import com.example.speaksure_capstone.response.DetailResponse
-import com.example.speaksure_capstone.response.ListThreadResponse
-import com.example.speaksure_capstone.response.LoginRegisterResponse
-import com.example.speaksure_capstone.response.ProfileResponse
+import com.example.speaksure_capstone.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -42,5 +41,16 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("thread_id") id: String
     ): Call<DetailResponse>
+
+    @Multipart
+    @POST("threads")
+    fun addNewThread(
+        @Header("Authorization") token: String,
+        @Part("title") title: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("topic") topic: RequestBody,
+        @Part photo: MultipartBody.Part,
+        @Part audio : MultipartBody.Part
+    ): Call<AddThreadResponse>
 
 }

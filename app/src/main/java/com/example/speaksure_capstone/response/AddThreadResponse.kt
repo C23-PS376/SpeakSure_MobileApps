@@ -5,10 +5,16 @@ import com.google.gson.annotations.SerializedName
 data class AddThreadResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataItem>,
+	val data: List<ThreadItem>,
 
 	@field:SerializedName("statusCode")
-	val statusCode: Int
+	val statusCode: Int,
+
+	@field:SerializedName("message")
+	val message: String?,
+
+	@SerializedName("error")
+	val error: String?
 )
 
 data class ThreadItem(
@@ -29,5 +35,8 @@ data class ThreadItem(
 	val audio: String,
 
 	@field:SerializedName("title")
-	val title: String
+	val title: String,
+
+	@SerializedName("audio_length")
+	val audioLength: Float
 )
