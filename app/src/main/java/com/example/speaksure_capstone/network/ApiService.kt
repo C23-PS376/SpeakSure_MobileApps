@@ -1,9 +1,6 @@
 package com.example.speaksure_capstone.network
 
-import com.example.speaksure_capstone.response.DetailResponse
-import com.example.speaksure_capstone.response.ListThreadResponse
-import com.example.speaksure_capstone.response.LoginRegisterResponse
-import com.example.speaksure_capstone.response.ProfileResponse
+import com.example.speaksure_capstone.response.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -43,4 +40,23 @@ interface ApiService {
         @Path("thread_id") id: String
     ): Call<DetailResponse>
 
+    @POST("threads/{thread_id}/likes")
+    fun like(
+        @Header("Authorization") token: String,
+        @Path("thread_id") id: String
+    ):Call <LikeResponse>
+
+    @DELETE("threads/{thread_id}/likes")
+    fun unlike(
+        @Header("Authorization") token: String,
+        @Path("thread_id") id: String
+    ):Call<String>
+
+    @GET("threads")
+    suspend fun searchThread(
+        @Header("Authorization") token: String,
+        @Query("keyword") keyword:String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ):ListThreadResponse
 }

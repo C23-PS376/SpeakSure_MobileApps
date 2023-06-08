@@ -6,14 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.speaksure_capstone.response.ListThreads
+import com.example.speaksure_capstone.response.TopicConverter
 import com.example.speaksure_capstone.response.UserConverter
 
 @Database(
     entities = [ListThreads::class,RemoteKeys::class],
-    version = 3,
+    version = 5,
     exportSchema = false
 )
-@TypeConverters(UserConverter::class)
+@TypeConverters(UserConverter::class, TopicConverter::class)
 abstract class ThreadDatabase : RoomDatabase(){
     abstract fun threadDao(): ThreadDao
     abstract fun remoteKeysDao(): RemoteKeysDao

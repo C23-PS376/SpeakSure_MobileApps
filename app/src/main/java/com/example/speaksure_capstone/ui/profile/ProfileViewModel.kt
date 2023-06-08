@@ -16,7 +16,6 @@ import retrofit2.Response
 
 class ProfileViewModel(threadRepository: ThreadRepository): ViewModel() {
 
-
     private val _detailUser = MutableLiveData<ProfileResponse>()
     val detailUser: LiveData<ProfileResponse> = _detailUser
 
@@ -39,11 +38,11 @@ class ProfileViewModel(threadRepository: ThreadRepository): ViewModel() {
     }
 
 
-    class ProfileViewModelFactory(private val token: String, private val context: Context) : ViewModelProvider.Factory {
+    class ProfileViewModelFactory(private val query: String,private val token: String, private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return ProfileViewModel(Injection.provideRepository(token,context)) as T
+                return ProfileViewModel(Injection.provideRepository(query,token,context)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

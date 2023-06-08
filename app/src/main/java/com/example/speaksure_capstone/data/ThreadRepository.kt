@@ -8,18 +8,18 @@ import com.example.speaksure_capstone.network.ApiService
 import com.example.speaksure_capstone.database.ThreadDatabase
 import com.example.speaksure_capstone.response.ListThreads
 
-class ThreadRepository(private val threadDatabase: ThreadDatabase, private val apiService: ApiService, private val token: String) {
-    fun getThread(): LiveData<PagingData<ListThreads>> {
+class ThreadRepository(private val threadDatabase: ThreadDatabase,private val query : String, private val apiService: ApiService, private val token: String) {
+    fun getThread(query: String): LiveData<PagingData<ListThreads>> {
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
-            remoteMediator = ThreadRemoteMediator(threadDatabase,apiService,token),
+            remoteMediator = ThreadRemoteMediator(threadDatabase,query,apiService,token),
             pagingSourceFactory = {
-//                ThreadPagingSource(apiService,token)
                 threadDatabase.threadDao().getAllThread()
             }
         ).liveData
     }
+
 }
