@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -22,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.speaksure_capstone.R
@@ -44,9 +44,9 @@ private const val PICK_AUDIO_REQUEST_CODE = 5
 private const val READ_EXTERNAL_STORAGE_REQUEST_CODE = 6
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
-private const val MAXIMAL_SIZE = 1000000
 class AddThreadFragment : Fragment() {
-    private lateinit var textInputEditText: TextInputEditText
+    private var textInputEditText: TextInputEditText?=null
+    private var titleInputEditText: TextInputEditText? = null
     private var _binding: FragmentAddThreadBinding? = null
     private val binding get() = _binding!!
     private var isRecording = false
@@ -59,6 +59,7 @@ class AddThreadFragment : Fragment() {
 
     private var getImageFile: File? = null
     private var getAudioFile: File? = null
+    private var getTopic: String? = null
 
     private val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
@@ -97,6 +98,10 @@ class AddThreadFragment : Fragment() {
             uploadThread()
         }
 
+        topic()
+
+
+
 
         initializeFragment()
 
@@ -105,6 +110,43 @@ class AddThreadFragment : Fragment() {
 
         return rootView
     }
+
+    private fun topic() {
+        binding.chipGroupTopics.forEach { chip ->
+            chip.setOnClickListener {
+                // Lakukan sesuatu ketika Chip diklik
+                when (chip.id) {
+                    R.id.topic_1 -> {
+                        // Aksi untuk Topic 1 dipilih
+                        getTopic = "2"
+                        Log.e("topic", "no2")
+                    }
+                    R.id.topic_2 -> {
+                        // Aksi untuk Topic 2 dipilih
+                        getTopic = "3"
+                    }
+                    R.id.topic_3 -> {
+                        // Aksi untuk Topic 3 dipilih
+                        getTopic = "4"
+                    }
+                    R.id.topic_4 -> {
+                        // Aksi untuk Topic 4 dipilih
+                        getTopic = "5"
+                    }
+                    R.id.topic_5 -> {
+                        // Aksi untuk Topic 5 dipilih
+                        getTopic = "6"
+                    }
+                    // Tambahkan aksi untuk chip lainnya sesuai kebutuhan
+                }
+            }
+        }
+    }
+
+
+
+
+
 
     private fun initializeFragment() {
         setupAudioRecorder()
@@ -232,10 +274,10 @@ class AddThreadFragment : Fragment() {
     }
 
     private fun getTitleText(): String {
-        return textInputEditText.text.toString().takeIf { it.isNotBlank() } ?: "No description provided"
+        return titleInputEditText?.text.toString()
     }
     private fun getDescText(): String {
-        return textInputEditText.text.toString().takeIf { it.isNotBlank() } ?: "No description provided"
+        return textInputEditText?.text.toString()
     }
 
 
@@ -274,8 +316,10 @@ class AddThreadFragment : Fragment() {
     }
 
     private fun handleImage(imageBitmap: Bitmap?) {
-        // Lakukan sesuatu dengan gambar (misalnya, tampilkan gambar di ImageView)
-        binding.imageView.setImageBitmap(imageBitmap)
+
+        binding.imageView.apply {
+            setImageBitmap(imageBitmap)
+        }
     }
 
     private fun getImageBitmapFromUri(imageUri: Uri?): Bitmap? {
@@ -293,10 +337,10 @@ class AddThreadFragment : Fragment() {
         Log.e("btn","btn dipencet")
         Log.e("audio", getAudioFile.toString())
         Log.e("btn",getImageFile.toString())
-        if(getTitleText()!= null){
+        Log.e("topic",getTopic.toString())
 
             val audioFile = getAudioFile
-            val imageFile = reduceFileImage(getImageFile as File)
+            val imageFile = getImageFile as File
 
             preferences = requireActivity().getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
             var token = preferences.getString(LoginActivity.TOKEN, "").toString()
@@ -304,7 +348,7 @@ class AddThreadFragment : Fragment() {
 
             val title = getTitleText().toRequestBody("text/plain".toMediaType())
             val description = getDescText().toRequestBody("text/plain".toMediaType())
-            val topic = "2".toRequestBody("text/plain".toMediaType())
+            val topic = getTopic!!.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val requestAudioFile = audioFile!!.asRequestBody("audio/mp3".toMediaType())
 
@@ -321,7 +365,7 @@ class AddThreadFragment : Fragment() {
             Log.e("token", token)
             viewModel.addThread(token,title, description,topic,imageMultipart,audioMultipart)
 
-        }
+
 
     }
 
@@ -345,24 +389,6 @@ class AddThreadFragment : Fragment() {
         return File.createTempFile(timeStamp, ".jpg", storageDir)
     }
 
-    private fun reduceFileImage(file: File): File {
-        val bitmap = BitmapFactory.decodeFile(file.path)
-
-        var compressQuality = 100
-        var streamLength: Int
-
-        do {
-            val bmpStream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
-            val bmpPicByteArray = bmpStream.toByteArray()
-            streamLength = bmpPicByteArray.size
-            compressQuality -= 5
-        } while (streamLength > MAXIMAL_SIZE)
-
-        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-
-        return file
-    }
 
 
     @Deprecated("Deprecated in Java")
@@ -376,12 +402,9 @@ class AddThreadFragment : Fragment() {
                     // Gambar diambil dari kamera
                     @Suppress("DEPRECATION")
                     val imageBitmap = data?.extras?.get("data") as Bitmap?
-                    getImageFile= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        data?.getSerializableExtra("picture", File::class.java)
-                    } else {
-                        @Suppress("DEPRECATION")
-                        data?.getSerializableExtra("picture")
-                    } as? File
+                    getImageFile = imageBitmap?.let { bitmapToFile(it,requireContext()) }
+
+                    Log.e("imageFile","$getImageFile")
 
                     // Gunakan gambar yang diambil
                     handleImage(imageBitmap)
@@ -397,6 +420,19 @@ class AddThreadFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun bitmapToFile(bitmap: Bitmap, context: Context): File {
+        // Membuat file di direktori cache aplikasi
+        val file = File(context.cacheDir, "image.jpg")
+
+        // Mengkompresi bitmap ke dalam file JPG
+        file.outputStream().use { outputStream ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.flush()
+        }
+
+        return file
     }
 
 

@@ -28,8 +28,8 @@ class AddThreadViewModel:ViewModel() {
                 }else{
                     Log.e("failed 1", "Error ${response.code()}: ${response.errorBody()} ")
                     Log.e("failed 2", "Error ${response.body()?.message}")
-                    Log.e("failed 2", "Error ${response.body()?.error}")
-                    Log.e("failed 2", "Error ${response.body()}")
+                    Log.e("failed 3", "Error ${response.body()?.error}")
+                    Log.e("failed 4", "Error ${response.body()}")
                 }
 
             }
