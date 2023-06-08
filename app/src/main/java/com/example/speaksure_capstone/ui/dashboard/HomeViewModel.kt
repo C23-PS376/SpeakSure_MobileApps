@@ -16,15 +16,11 @@ import retrofit2.Response
 
 class HomeViewModel(threadRepository: ThreadRepository): ViewModel() {
 
-    private val _query = MutableLiveData<String>()
 
-    val thread: LiveData<PagingData<ListThreads>> = _query.switchMap { query ->
-        threadRepository.getThread(query).cachedIn(viewModelScope)
-    }
+    val thread: LiveData<PagingData<ListThreads>> =
+        threadRepository.getThread().cachedIn(viewModelScope)
 
-    fun setQuery(query: String) {
-        _query.value = query
-    }
+
     class HomeViewModelFactory(private val query: String,private val token: String, private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {

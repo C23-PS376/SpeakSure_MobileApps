@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
@@ -22,32 +23,24 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var searchView: SearchView
-    private var query: String = ""
-    private lateinit var adapter: ThreadPagingAdapter
-    private var isSearching = false
-    private var previousQuery = ""
+    private var query:String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
         preferences = requireActivity().getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        val mytoken = preferences.getString(LoginActivity.TOKEN, "").toString()
-        if (mytoken.isEmpty()) {
+        var mytoken = preferences.getString(LoginActivity.TOKEN, "").toString()
+        if(mytoken == null){
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+        var token= "Bearer $mytoken"
 
-        val token = "Bearer $mytoken"
         val isLoggedIn = preferences.getBoolean(LoginActivity.ISLOGGEDIN, false)
 
+
         binding.rvThread.layoutManager = LinearLayoutManager(requireContext())
-        adapter = ThreadPagingAdapter()
-        binding.rvThread.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                adapter.retry()
-            }
-        )
 
         val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView = SearchView(requireContext())
@@ -56,51 +49,42 @@ class HomeFragment : Fragment() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(queryIn: String): Boolean {
-                query = queryIn
-                refreshData()
+                // Panggil metode untuk melakukan pencarian berdasarkan teks yang dimasukkan
+                var tes = queryIn
+                getData()
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                query = newText
-                refreshData()
+                // Jika Anda ingin merespons perubahan teks saat pengguna mengetik
+                var tes = newText
+                getData()
                 return true
             }
         })
 
-        viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(query, token, requireContext()))[HomeViewModel::class.java]
-
-        if (!isLoggedIn) {
+        viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(query,token, requireContext()))[HomeViewModel::class.java]
+        if (!isLoggedIn)  {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
-        } else {
+        }else{
             getData()
         }
 
         return rootView
     }
 
-    private fun refreshData() {
-        if (query != previousQuery) {
-            isSearching = true
-            previousQuery = query
-            getData()
-        }
-    }
+
 
     private fun getData() {
-        viewModel.setQuery(query)
+        val adapter = ThreadPagingAdapter()
+        binding.rvThread.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
         viewModel.thread.observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle, it)
-            if (isSearching) {
-                binding.rvThread.scrollToPosition(0)
-                isSearching = false
-            }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

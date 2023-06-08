@@ -56,11 +56,8 @@ class ThreadRemoteMediator(
 
 
         return try {
-            val responseData = if(query !=""){
-                apiService.searchThread(token, query, page, state.config.pageSize)
-            }else{
-                apiService.getThread(token, page, state.config.pageSize)
-            }
+
+            val responseData = apiService.getThread(token, page, state.config.pageSize)
             Log.d("ThreadRemoteMediator", "Response Data: $responseData")
 
             val endOfPaginationReached = responseData.data.isEmpty()

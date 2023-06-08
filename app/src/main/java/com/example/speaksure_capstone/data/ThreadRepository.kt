@@ -9,7 +9,7 @@ import com.example.speaksure_capstone.database.ThreadDatabase
 import com.example.speaksure_capstone.response.ListThreads
 
 class ThreadRepository(private val threadDatabase: ThreadDatabase,private val query : String, private val apiService: ApiService, private val token: String) {
-    fun getThread(query: String): LiveData<PagingData<ListThreads>> {
+    fun getThread(): LiveData<PagingData<ListThreads>> {
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
@@ -21,5 +21,4 @@ class ThreadRepository(private val threadDatabase: ThreadDatabase,private val qu
             }
         ).liveData
     }
-
 }
