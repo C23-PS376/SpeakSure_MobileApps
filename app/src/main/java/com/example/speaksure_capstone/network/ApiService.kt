@@ -53,4 +53,23 @@ interface ApiService {
         @Part audio : MultipartBody.Part
     ): Call<AddThreadResponse>
 
+    @POST("threads/{thread_id}/likes")
+    fun like(
+        @Header("Authorization") token: String,
+        @Path("thread_id") id: String
+    ):Call <LikeResponse>
+
+    @DELETE("threads/{thread_id}/likes")
+    fun unlike(
+        @Header("Authorization") token: String,
+        @Path("thread_id") id: String
+    ):Call<String>
+
+    @GET("threads")
+    suspend fun searchThread(
+        @Header("Authorization") token: String,
+        @Query("keyword") keyword:String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ):ListThreadResponse
 }

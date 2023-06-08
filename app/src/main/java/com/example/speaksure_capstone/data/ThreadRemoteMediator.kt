@@ -1,5 +1,7 @@
 package com.example.speaksure_capstone.data
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -10,13 +12,16 @@ import com.example.speaksure_capstone.database.RemoteKeys
 import com.example.speaksure_capstone.database.ThreadDatabase
 import com.example.speaksure_capstone.network.ApiService
 import com.example.speaksure_capstone.response.ListThreads
+import com.example.speaksure_capstone.ui.login.LoginActivity
 
 @OptIn(ExperimentalPagingApi::class)
 class ThreadRemoteMediator(
     private val database: ThreadDatabase,
+    private val query: String,
     private val apiService: ApiService,
     private val token : String
 ) : RemoteMediator<Int, ListThreads>() {
+    private lateinit var preferences: SharedPreferences
 
     private companion object {
         const val INITIAL_PAGE_INDEX = 1
@@ -49,9 +54,13 @@ class ThreadRemoteMediator(
             }
         }
 
-        return try {
-            val responseData = apiService.getThread(token, page, state.config.pageSize)
 
+        return try {
+            val responseData = if(query !=""){
+                apiService.searchThread(token, query, page, state.config.pageSize)
+            }else{
+                apiService.getThread(token, page, state.config.pageSize)
+            }
             Log.d("ThreadRemoteMediator", "Response Data: $responseData")
 
             val endOfPaginationReached = responseData.data.isEmpty()

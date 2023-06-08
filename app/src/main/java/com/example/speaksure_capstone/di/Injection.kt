@@ -6,9 +6,9 @@ import com.example.speaksure_capstone.database.ThreadDatabase
 import com.example.speaksure_capstone.network.ApiConfig
 
 object Injection {
-    fun provideRepository(token: String, context: Context): ThreadRepository {
+    fun provideRepository(query: String,token: String, context: Context): ThreadRepository {
         val database= ThreadDatabase.getDatabase(context)
         val apiService = ApiConfig.getApiService()
-        return ThreadRepository(database,apiService,token)
+        return ThreadRepository(database,query,apiService,token)
     }
 }

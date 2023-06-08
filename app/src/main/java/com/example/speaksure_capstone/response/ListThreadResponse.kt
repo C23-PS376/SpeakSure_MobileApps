@@ -3,7 +3,6 @@ package com.example.speaksure_capstone.response
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
@@ -16,11 +15,20 @@ data class ListThreadResponse(
 	val statusCode: Int? = null
 )
 
+data class Topic(
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null
+)
+
 @Entity(tableName = "thread")
 data class ListThreads(
 
 	@field:SerializedName("likes_count")
-	val likesCount: String? = null,
+	val likesCount: String,
 
 	@field:SerializedName("image")
 	val image: String? = null,
@@ -37,11 +45,11 @@ data class ListThreads(
 	@field:SerializedName("description")
 	val description: String? = null,
 
-	@field:SerializedName("topic")
-	val topic: String? = null,
-
 	@field:SerializedName("created_at")
-	val createdAt: String? = null,
+	val createdAt: String,
+
+	@field:SerializedName("topic")
+	val topic: Topic? = null,
 
 	@PrimaryKey
 	@field:SerializedName("id")
@@ -56,6 +64,7 @@ data class ListThreads(
 	@field:SerializedName("user")
 	val user: User? = null
 )
+
 data class User(
 
 	@field:SerializedName("image")
@@ -75,5 +84,18 @@ class UserConverter {
 	@TypeConverter
 	fun toUser(userString: String?): User? {
 		return Gson().fromJson(userString, User::class.java)
+	}
+}
+
+class TopicConverter {
+
+	@TypeConverter
+	fun fromTopic(topic: Topic?): String? {
+		return Gson().toJson(topic)
+	}
+
+	@TypeConverter
+	fun toTopic(topicString: String?): Topic? {
+		return Gson().fromJson(topicString, Topic::class.java)
 	}
 }

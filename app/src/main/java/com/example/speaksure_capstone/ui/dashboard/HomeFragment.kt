@@ -1,12 +1,13 @@
 package com.example.speaksure_capstone.ui.dashboard
 
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,41 +21,86 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var searchView: SearchView
+    private var query: String = ""
+    private lateinit var adapter: ThreadPagingAdapter
+    private var isSearching = false
+    private var previousQuery = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
         preferences = requireActivity().getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        var token = preferences.getString(LoginActivity.TOKEN, "").toString()
-        token= "Bearer $token"
-
-        binding.rvThread.layoutManager = LinearLayoutManager(requireContext())
-
-        viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(token, requireContext()))[HomeViewModel::class.java]
-
-        val isLoggedIn = preferences.getBoolean(LoginActivity.ISLOGGEDIN, false)
-
-        if (!isLoggedIn)  {
+        val mytoken = preferences.getString(LoginActivity.TOKEN, "").toString()
+        if (mytoken.isEmpty()) {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
-        }else{
+        }
+
+        val token = "Bearer $mytoken"
+        val isLoggedIn = preferences.getBoolean(LoginActivity.ISLOGGEDIN, false)
+
+        binding.rvThread.layoutManager = LinearLayoutManager(requireContext())
+        adapter = ThreadPagingAdapter()
+        binding.rvThread.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+
+        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = SearchView(requireContext())
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        searchView.queryHint = "Search"
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(queryIn: String): Boolean {
+                query = queryIn
+                refreshData()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                query = newText
+                refreshData()
+                return true
+            }
+        })
+
+        viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(query, token, requireContext()))[HomeViewModel::class.java]
+
+        if (!isLoggedIn) {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        } else {
             getData()
         }
 
         return rootView
     }
 
+    private fun refreshData() {
+        if (query != previousQuery) {
+            isSearching = true
+            previousQuery = query
+            getData()
+        }
+    }
 
     private fun getData() {
-        val adapter = ThreadPagingAdapter()
-        binding.rvThread.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                adapter.retry()
-            }
-        )
+        viewModel.setQuery(query)
         viewModel.thread.observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle, it)
+            if (isSearching) {
+                binding.rvThread.scrollToPosition(0)
+                isSearching = false
+            }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
