@@ -72,4 +72,5 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ):ListThreadResponse
+
 }

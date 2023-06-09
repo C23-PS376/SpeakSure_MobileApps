@@ -7,7 +7,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -40,29 +40,6 @@ class HomeFragment : Fragment() {
         val isLoggedIn = preferences.getBoolean(LoginActivity.ISLOGGEDIN, false)
 
 
-        binding.rvThread.layoutManager = LinearLayoutManager(requireContext())
-
-        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView = SearchView(requireContext())
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-        searchView.queryHint = "Search"
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(queryIn: String): Boolean {
-                // Panggil metode untuk melakukan pencarian berdasarkan teks yang dimasukkan
-                var tes = queryIn
-                getData()
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                // Jika Anda ingin merespons perubahan teks saat pengguna mengetik
-                var tes = newText
-                getData()
-                return true
-            }
-        })
-
         viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(query,token, requireContext()))[HomeViewModel::class.java]
         if (!isLoggedIn)  {
             val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -70,12 +47,41 @@ class HomeFragment : Fragment() {
         }else{
             getData()
         }
+        binding.rvThread.layoutManager = LinearLayoutManager(requireContext())
+
+        searchView = binding.search
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(queryIn: String): Boolean {
+                query = queryIn
+                searchData(query)
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                query = newText
+                searchData(query)
+                return true
+            }
+        })
 
         return rootView
     }
 
 
 
+    private fun searchData(query:String) {
+        val adapter = ThreadPagingAdapter()
+        binding.rvThread.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+        viewModel.searchThreads(query).observe(viewLifecycleOwner) {
+            adapter.submitData(lifecycle, it)
+        }
+    }
     private fun getData() {
         val adapter = ThreadPagingAdapter()
         binding.rvThread.adapter = adapter.withLoadStateFooter(
@@ -83,7 +89,7 @@ class HomeFragment : Fragment() {
                 adapter.retry()
             }
         )
-        viewModel.thread.observe(viewLifecycleOwner) {
+        viewModel.getThread().observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle, it)
         }
     }

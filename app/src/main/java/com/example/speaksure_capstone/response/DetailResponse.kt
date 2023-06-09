@@ -23,7 +23,7 @@ data class UserDetail(
 data class DataDetail(
 
 	@field:SerializedName("likes_count")
-	val likesCount: String? = null,
+	val likesCount: String,
 
 	@field:SerializedName("image")
 	val image: String? = null,
