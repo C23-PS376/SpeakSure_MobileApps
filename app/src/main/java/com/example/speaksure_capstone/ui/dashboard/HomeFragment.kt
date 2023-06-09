@@ -1,18 +1,13 @@
 package com.example.speaksure_capstone.ui.dashboard
 
-import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import android.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -75,32 +70,11 @@ class HomeFragment : Fragment() {
             }
         })
 
-        viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(query, token, requireContext()))[HomeViewModel::class.java]
-
-        if (!isLoggedIn) {
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intent)
-        } else {
-            getData()
-        }
-
         filterTopic()
-
 
         return rootView
     }
 
-
-
-    private fun searchData(query:String) {
-        val adapter = ThreadPagingAdapter()
-        binding.rvThread.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                adapter.retry()
-            }
-        )
-        viewModel.searchThreads(query).observe(viewLifecycleOwner) {
-            adapter.submitData(lifecycle, it)
     private fun filterTopic(){
         binding.homeChipGroup.forEach { chip ->
             chip.setOnClickListener {
@@ -125,13 +99,20 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun refreshData() {
-        if (query != previousQuery) {
-            isSearching = true
-            previousQuery = query
-            getData()
+
+
+    private fun searchData(query:String) {
+        val adapter = ThreadPagingAdapter()
+        binding.rvThread.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+        viewModel.searchThreads(query).observe(viewLifecycleOwner) {
+            adapter.submitData(lifecycle, it)
         }
     }
+
     private fun getData() {
         val adapter = ThreadPagingAdapter()
         binding.rvThread.adapter = adapter.withLoadStateFooter(
@@ -146,10 +127,5 @@ class HomeFragment : Fragment() {
                 isSearching = false
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
