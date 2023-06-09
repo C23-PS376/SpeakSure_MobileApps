@@ -5,12 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.adapter.LoadingStateAdapter
 import com.example.speaksure_capstone.adapter.ThreadPagingAdapter
 import com.example.speaksure_capstone.databinding.FragmentHomeBinding
@@ -77,7 +80,34 @@ class HomeFragment : Fragment() {
             getData()
         }
 
+        filterTopic()
+
+
         return rootView
+    }
+
+    private fun filterTopic(){
+        binding.homeChipGroup.forEach { chip ->
+            chip.setOnClickListener {
+                when (chip.id){
+                    R.id.topic_1 -> {
+                        // Aksi untuk Topic 1 dipilih
+                    }
+                    R.id.topic_2 -> {
+                        // Aksi untuk Topic 2 dipilih
+                    }
+                    R.id.topic_3 -> {
+                        // Aksi untuk Topic 3 dipilih
+                    }
+                    R.id.topic_4 -> {
+                        // Aksi untuk Topic 4 dipilih
+                    }
+                    R.id.topic_5 -> {
+                        // Aksi untuk Topic 5 dipilih
+                    }
+                }
+            }
+        }
     }
 
     private fun refreshData() {

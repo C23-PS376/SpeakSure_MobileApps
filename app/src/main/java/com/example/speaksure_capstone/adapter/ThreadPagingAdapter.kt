@@ -7,7 +7,10 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.Toast
+import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +19,6 @@ import com.example.speaksure_capstone.databinding.ItemThreadBinding
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.LikeResponse
 import com.example.speaksure_capstone.response.ListThreads
-import com.example.speaksure_capstone.response.LoginRegisterResponse
 import com.example.speaksure_capstone.ui.detail.DetailActivity
 import com.example.speaksure_capstone.ui.login.LoginActivity
 import retrofit2.Call
@@ -25,7 +27,11 @@ import retrofit2.Response
 import java.sql.Timestamp
 import java.util.*
 
-class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.MyViewHolder>(DiffCallback) {
+class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.MyViewHolder>(DiffCallback),
+    Filterable {
+
+    private var originalData: List<ListThreads>? = null
+    private var filteredData: List<ListThreads>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemThreadBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -117,6 +123,39 @@ class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.My
             return oldItem == newItem
         }
     }
+
+    override fun getFilter(): Filter {
+        TODO("masih mencari referensi filter")
+        /*return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val query = constraint?.toString()?.toLowerCase(Locale.ROOT)
+                val filterResults = FilterResults()
+
+                if (originalData == null) {
+                    originalData = snapshot().items
+                }
+
+                filteredData = if (query.isNullOrEmpty()) {
+                    originalData
+                } else {
+                    originalData?.filter { thread ->
+                        thread.topic.toLowerCase(Locale.ROOT).contains(query) ||
+                                thread.user?.name?.toLowerCase(Locale.ROOT)?.contains(query) == true
+                    }
+                }
+
+                filterResults.values = filteredData
+                filterResults.count = filteredData?.size ?: 0
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                val data = results?.values as? List<ListThreads>
+                submitData(data?.let { PagingData.from(it) })
+            }
+        }*/
+    }
+
 
 
 }
