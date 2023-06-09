@@ -1,5 +1,6 @@
 package com.example.speaksure_capstone.ui.detail
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -7,19 +8,26 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.databinding.ActivityDetailBinding
+import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.DetailResponse
+import com.example.speaksure_capstone.response.LikeResponse
 import com.example.speaksure_capstone.ui.login.LoginActivity
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 import java.sql.Timestamp
 import java.util.*
@@ -169,6 +177,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setDetailThread(detail: DetailResponse) {
+        var likesCount: Int = detail.data?.likesCount!!.toInt()
         binding.Name.text = detail.data?.user?.name
         val timeStamp = detail.data?.createdAt?.let { Timestamp(it.toLong()) }
         binding.dateThread.text = timeStamp.toString()
@@ -187,6 +196,52 @@ class DetailActivity : AppCompatActivity() {
             else{
                 pauseAudio()
             }
+        }
+        binding.btnUp.setOnClickListener {
+            preferences =binding.root.context.getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+            var token = preferences.getString(LoginActivity.TOKEN, "").toString()
+            token= "Bearer $token"
+            val id = detail?.data.id.toString()
+            val client = ApiConfig.getApiService().like(token,id)
+            client.enqueue(object : Callback<LikeResponse> {
+                override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
+                    if (response.isSuccessful && response.body()?.statusCode == 201) {
+                        Toast.makeText(binding.root.context,"success", Toast.LENGTH_SHORT).show()
+                        likesCount++ // Tambahkan 1 ke likesCount
+                        binding.tvJlhLike.text = likesCount.toString()
+                    } else {
+                        Toast.makeText(binding.root.context,"Thread already liked", Toast.LENGTH_SHORT).show()
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
+                    Toast.makeText(binding.root.context,t.message, Toast.LENGTH_SHORT).show()
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
+        }
+        binding.btnDown.setOnClickListener {
+            preferences =binding.root.context.getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+            var token = preferences.getString(LoginActivity.TOKEN, "").toString()
+            token= "Bearer $token"
+            val id = detail?.data.id.toString()
+            val client = ApiConfig.getApiService().unlike(token,id)
+            client.enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(binding.root.context,"success", Toast.LENGTH_SHORT).show()
+                        likesCount-- // Tambahkan 1 ke likesCount
+                        binding.tvJlhLike.text = likesCount.toString()
+                    } else {
+                        Toast.makeText(binding.root.context,"Thread already unliked", Toast.LENGTH_SHORT).show()
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Toast.makeText(binding.root.context,t.message, Toast.LENGTH_SHORT).show()
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                }
+            })
         }
     }
 

@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import com.example.speaksure_capstone.ui.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 import java.sql.Timestamp
 import java.util.*
 
@@ -50,6 +52,8 @@ class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.My
         fun bind(data: ListThreads) {
             var likesCount: Int = data.likesCount.toInt()
             var preferences: SharedPreferences
+            var isPlaying = false
+            var mediaPlayer: MediaPlayer? = null
             Glide.with(itemView)
                 .load(data.image)
                 .into(binding.imageThread)
@@ -64,6 +68,29 @@ class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.My
                 val intent = Intent(binding.root.context, DetailActivity::class.java )
                 intent.putExtra(DetailActivity.ID_THREAD, data.id)
                 binding.root.context.startActivity(intent)
+            }
+            binding.btnPlayThread.setOnClickListener {
+                if(!isPlaying){
+                    isPlaying =true
+                    mediaPlayer?.apply {
+                        stop()
+                        release()
+                    }
+                    mediaPlayer = null
+                    mediaPlayer = MediaPlayer().apply {
+                        try {
+                            setDataSource(data.audio.toString())
+                            prepare()
+                            start()
+                        } catch (e: IOException) {
+                        }
+                    }
+                }
+                else{
+                    isPlaying =false
+                    mediaPlayer?.release()
+                    mediaPlayer = null
+                }
             }
             binding.btnUp.setOnClickListener {
                 preferences =binding.root.context.getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
