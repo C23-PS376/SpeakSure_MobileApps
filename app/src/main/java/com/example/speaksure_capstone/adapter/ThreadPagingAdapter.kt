@@ -57,7 +57,8 @@ class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.My
             var isPlaying = false
             var mediaPlayer: MediaPlayer? = null
             Glide.with(itemView)
-                .load(data.image)                .into(binding.imageThread)
+                .load(data.image)
+                .into(binding.imageThread)
             val timeStamp = Timestamp(data.createdAt.toLong())
             binding.dateThread.text = timeStamp.toString()
             binding.title.text = data.title

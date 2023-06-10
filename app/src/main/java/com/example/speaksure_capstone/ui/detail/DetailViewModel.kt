@@ -46,7 +46,7 @@ class DetailViewModel:ViewModel() {
         token: String,
         threadId: RequestBody,
         comment: RequestBody,
-        audioMultipart: MultipartBody.Part
+        audioMultipart: MultipartBody.Part?
     ) {
         val client =
             ApiConfig.getApiService().setCommentThread(token, threadId, comment, audioMultipart)

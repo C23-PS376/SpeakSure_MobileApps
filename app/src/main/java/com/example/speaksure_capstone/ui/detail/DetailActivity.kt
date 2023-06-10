@@ -20,6 +20,7 @@ import com.example.speaksure_capstone.response.LikeResponse
 import com.example.speaksure_capstone.ui.login.LoginActivity
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
@@ -86,7 +87,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun sendComment(){
-        val audioFile = getAudioFile as File
+        val audioFile: File? = getAudioFile
 
         preferences = this.getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         var token = preferences.getString(LoginActivity.TOKEN, "").toString()
@@ -94,14 +95,24 @@ class DetailActivity : AppCompatActivity() {
 
         val threadId = setThreadId().toString().toRequestBody("text/plain".toMediaType())
         val comment = setCommentText().toRequestBody("text/plain".toMediaType())
-        val requestAudioFile =getAudioFile!!.asRequestBody("audio/mp3".toMediaType())
-        val audioMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "audio",
-            audioFile.name,
-            requestAudioFile
-        )
+        val requestAudioFile = getAudioFile?.asRequestBody("audio/mp3".toMediaType()) ?: createEmptyRequestBody()
+        val audioMultipart: MultipartBody.Part? = audioFile?.let {
+            MultipartBody.Part.createFormData(
+                "audio",
+                it.name,
+                requestAudioFile
+            )
+        }
+
+        Log.e("msg 1", "${setThreadId()}")
+        Log.e("msg 1", setCommentText())
+        Log.e("msg 1", "$audioFile")
 
         viewModel.setComment(token,threadId,comment,audioMultipart)
+    }
+
+    private fun createEmptyRequestBody(): RequestBody {
+        return "".toRequestBody("audio/mp3".toMediaType())
     }
 
     private fun initializeComment(){

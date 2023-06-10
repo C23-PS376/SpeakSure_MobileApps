@@ -74,12 +74,12 @@ interface ApiService {
     ):ListThreadResponse
 
     @Multipart
-    @POST("threads/{threadId}/comment")
+    @POST("threads/{threadId}/comments")
     fun setCommentThread(
         @Header("Authorization") token: String,
         @Path("threadId") threadId: RequestBody,
         @Part("text") text: RequestBody,
-        @Part audio : MultipartBody.Part
+        @Part audio : MultipartBody.Part?
     ): Call<CommentResponse>
 
 }
