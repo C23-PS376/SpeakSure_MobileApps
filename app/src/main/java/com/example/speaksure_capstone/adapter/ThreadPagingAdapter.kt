@@ -8,8 +8,6 @@ import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import android.widget.Toast
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
@@ -22,6 +20,10 @@ import com.example.speaksure_capstone.response.LikeResponse
 import com.example.speaksure_capstone.response.ListThreads
 import com.example.speaksure_capstone.ui.detail.DetailActivity
 import com.example.speaksure_capstone.ui.login.LoginActivity
+import com.google.android.material.chip.Chip
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,11 +31,11 @@ import java.io.IOException
 import java.sql.Timestamp
 import java.util.*
 
-class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.MyViewHolder>(DiffCallback),
-    Filterable {
+class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.MyViewHolder>(DiffCallback){
 
     private var originalData: List<ListThreads>? = null
     private var filteredData: List<ListThreads>? = null
+    private var filterChip: Chip? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemThreadBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -55,8 +57,7 @@ class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.My
             var isPlaying = false
             var mediaPlayer: MediaPlayer? = null
             Glide.with(itemView)
-                .load(data.image)
-                .into(binding.imageThread)
+                .load(data.image)                .into(binding.imageThread)
             val timeStamp = Timestamp(data.createdAt.toLong())
             binding.dateThread.text = timeStamp.toString()
             binding.title.text = data.title
@@ -151,36 +152,31 @@ class ThreadPagingAdapter: PagingDataAdapter<ListThreads, ThreadPagingAdapter.My
         }
     }
 
-    override fun getFilter(): Filter {
-        TODO("masih mencari referensi filter")
-        /*return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val query = constraint?.toString()?.toLowerCase(Locale.ROOT)
-                val filterResults = FilterResults()
+    fun setFilterChip(chip: Chip) {
+        filterChip = chip
+    }
 
-                if (originalData == null) {
-                    originalData = snapshot().items
-                }
+    fun filterData(query: String) {
+        val lowercaseQuery = query.lowercase(Locale.ROOT)
+        Log.e("filter",lowercaseQuery)
 
-                filteredData = if (query.isNullOrEmpty()) {
-                    originalData
-                } else {
-                    originalData?.filter { thread ->
-                        thread.topic.toLowerCase(Locale.ROOT).contains(query) ||
-                                thread.user?.name?.toLowerCase(Locale.ROOT)?.contains(query) == true
-                    }
-                }
+        if (originalData == null) {
+            originalData = snapshot().items
+        }
 
-                filterResults.values = filteredData
-                filterResults.count = filteredData?.size ?: 0
-                return filterResults
+        filteredData = if (lowercaseQuery=="all") {
+            Log.e("filter","data ori bosque")
+            originalData
+        } else {
+            Log.e("filter","filter terjadi")
+            originalData?.filter { thread ->
+                thread.topic!!.name!!.lowercase(Locale.ROOT) == lowercaseQuery
             }
+        }
 
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                val data = results?.values as? List<ListThreads>
-                submitData(data?.let { PagingData.from(it) })
-            }
-        }*/
+        CoroutineScope(Dispatchers.Main).launch {
+            submitData(filteredData?.let { PagingData.from(it) }!!)
+        }
     }
 
 
