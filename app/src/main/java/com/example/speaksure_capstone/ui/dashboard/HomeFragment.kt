@@ -28,24 +28,23 @@ class HomeFragment : Fragment() {
     private var query: String = ""
     private lateinit var adapter: ThreadPagingAdapter
     private var isSearching = false
-    private var previousQuery = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
         preferences = requireActivity().getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        var mytoken = preferences.getString(LoginActivity.TOKEN, "").toString()
-        if(mytoken == null){
+        val mytoken = preferences.getString(LoginActivity.TOKEN, "").toString()
+        if(mytoken == ""){
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
 
-        var token = "Bearer $mytoken"
+        val token = "Bearer $mytoken"
         val isLoggedIn = preferences.getBoolean(LoginActivity.ISLOGGEDIN, false)
 
 
-        viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(query,token, requireContext()))[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(query, token))[HomeViewModel::class.java]
         if (!isLoggedIn)  {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)

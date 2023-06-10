@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.speaksure_capstone.network.ApiService
 import com.example.speaksure_capstone.response.CommentItem
-import com.example.speaksure_capstone.response.ListThreads
 import okhttp3.RequestBody
 
 class CommentPagingSource (private val apiService: ApiService, private val token: String, private val threadId: RequestBody) : PagingSource<Int, CommentItem>() {

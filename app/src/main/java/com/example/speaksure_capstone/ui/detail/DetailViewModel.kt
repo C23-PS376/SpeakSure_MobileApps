@@ -12,7 +12,6 @@ import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.CommentItem
 import com.example.speaksure_capstone.response.CommentResponse
 import com.example.speaksure_capstone.response.DetailResponse
-import com.example.speaksure_capstone.ui.dashboard.HomeViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -28,11 +27,11 @@ class DetailViewModel(commentRepository: CommentRepository):ViewModel() {
 
     val comment : LiveData<PagingData<CommentItem>> = commentRepository.getComment().cachedIn(viewModelScope)
 
-    class DetailViewModelFactory(private val threadId: RequestBody,private val token: String, private val context: Context) : ViewModelProvider.Factory {
+    class DetailViewModelFactory(private val threadId: RequestBody,private val token: String) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return DetailViewModel(Injection.provideCommentRepository(threadId,token,context)) as T
+                return DetailViewModel(Injection.provideCommentRepository(threadId,token)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

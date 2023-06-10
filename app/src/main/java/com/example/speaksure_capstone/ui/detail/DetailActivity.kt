@@ -66,7 +66,7 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra(ID_THREAD).toString()
         val threadId = id.toRequestBody("text/plain".toMediaType())
-        viewModel =  ViewModelProvider(this, DetailViewModel.DetailViewModelFactory(threadId,token, this))[DetailViewModel::class.java]
+        viewModel =  ViewModelProvider(this, DetailViewModel.DetailViewModelFactory(threadId,token))[DetailViewModel::class.java]
         val detailThread = intent.getStringExtra(ID_THREAD)
 
         if (detailThread!= null) {

@@ -40,7 +40,7 @@ class ProfileFragment : Fragment() {
         token= "Bearer $token"
 
         var query =""
-        viewModel = ViewModelProvider(this, ProfileViewModel.ProfileViewModelFactory(query,token, requireContext()))[ProfileViewModel::class.java]
+        viewModel = ViewModelProvider(this, ProfileViewModel.ProfileViewModelFactory(query,token))[ProfileViewModel::class.java]
 
         val id = preferences.getString(LoginActivity.USER_ID,"").toString()
         viewModel.getUser(token, id)
