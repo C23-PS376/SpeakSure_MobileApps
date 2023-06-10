@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.speaksure_capstone.R
+import com.example.speaksure_capstone.adapter.CommentAdapter
+import com.example.speaksure_capstone.adapter.LoadingStateAdapter
 import com.example.speaksure_capstone.databinding.ActivityDetailBinding
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.DetailResponse
@@ -72,9 +74,9 @@ class DetailActivity : AppCompatActivity() {
             setDetailThread(detailThreads)
         }
 
-        viewModel.commentThread.observe(this){
+        getAllComment()
 
-        }
+
 
         binding.btnSend.setOnClickListener {
             sendComment()
@@ -84,6 +86,18 @@ class DetailActivity : AppCompatActivity() {
 
         initializeComment()
 
+    }
+
+    private fun getAllComment() {
+        val adapter = CommentAdapter()
+        binding.rvComment.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+        viewModel.comment.observe(this) {
+            adapter.submitData(lifecycle, it)
+        }
     }
 
     private fun sendComment(){

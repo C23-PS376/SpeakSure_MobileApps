@@ -82,4 +82,12 @@ interface ApiService {
         @Part audio : MultipartBody.Part?
     ): Call<CommentResponse>
 
+    @GET("threads/{threadId}/comments")
+    suspend fun getCommentThread(
+        @Header("Authorization") token: String,
+        @Path("threadId") threadId: RequestBody,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<CommentItem>
+
 }

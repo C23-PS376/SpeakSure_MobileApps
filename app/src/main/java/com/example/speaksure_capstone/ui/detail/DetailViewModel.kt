@@ -5,7 +5,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.speaksure_capstone.data.CommentRepository
 import com.example.speaksure_capstone.network.ApiConfig
+import com.example.speaksure_capstone.response.CommentItem
 import com.example.speaksure_capstone.response.CommentResponse
 import com.example.speaksure_capstone.response.DetailResponse
 import okhttp3.MultipartBody
@@ -14,13 +19,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel:ViewModel() {
+class DetailViewModel(commentRepository: CommentRepository):ViewModel() {
+
 
     private val _detailThread = MutableLiveData<DetailResponse>()
     val detailThread: LiveData<DetailResponse> = _detailThread
 
-    private val _commentThread = MutableLiveData<CommentResponse>()
-    val commentThread: LiveData<CommentResponse> = _commentThread
+
+    val comment : LiveData<PagingData<CommentItem>> = commentRepository.getComment().cachedIn(viewModelScope)
+
+
+
 
     fun getDetail(token: String, id: String) {
         val client = ApiConfig.getApiService().getDetail(token, id)
@@ -56,7 +65,7 @@ class DetailViewModel:ViewModel() {
                 response: Response<CommentResponse>
             ) {
                 if (response.isSuccessful) {
-                    _commentThread.value = response.body()
+                    Log.e(ContentValues.TAG, "sukses: ${response.message()}")
                 } else {
                     Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                 }
@@ -67,4 +76,30 @@ class DetailViewModel:ViewModel() {
             }
         })
     }
+
+    /*fun getComment(
+        token: String,
+        threadId: RequestBody,
+    ){
+        val client =
+            ApiConfig.getApiService().getCommentThread(token, threadId)
+        client.enqueue(object : Callback<CommentListResponse> {
+            override fun onResponse(
+                call: Call<CommentListResponse>,
+                response: Response<CommentListResponse>
+            ) {
+                if (response.isSuccessful) {
+                    _setCommentThread.value = response.body()?.commentItem
+                    Log.e(ContentValues.TAG, "onSucces: ${response.message()}")
+                } else {
+                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<CommentListResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+        })
+
+    }*/
 }
