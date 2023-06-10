@@ -11,7 +11,7 @@ object Injection {
         return ThreadRepository(apiService,token,query)
     }
 
-    fun provideCommentRepository(threadId: RequestBody,token: String): CommentRepository {
+    fun provideCommentRepository(threadId: Int,token: String): CommentRepository {
         val apiService = ApiConfig.getApiService()
         return CommentRepository(apiService,token,threadId)
     }

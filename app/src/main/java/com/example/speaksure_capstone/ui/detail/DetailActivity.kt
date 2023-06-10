@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.adapter.CommentAdapter
@@ -19,17 +20,16 @@ import com.example.speaksure_capstone.databinding.ActivityDetailBinding
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.DetailResponse
 import com.example.speaksure_capstone.response.LikeResponse
-import com.example.speaksure_capstone.ui.dashboard.HomeViewModel
 import com.example.speaksure_capstone.ui.login.LoginActivity
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.io.IOException
 import java.sql.Timestamp
 import java.util.*
@@ -46,6 +46,8 @@ class DetailActivity : AppCompatActivity() {
     private var getAudioFile: File? = null
     private var isRecording = false
 
+    private lateinit var commentAdapter: CommentAdapter
+
     companion object {
         const val ID_THREAD = "id_thread"
     }
@@ -59,13 +61,16 @@ class DetailActivity : AppCompatActivity() {
         var token = preferences.getString(LoginActivity.TOKEN, "").toString()
         token= "Bearer $token"
 
-        if(token == null){
+        if(token == "Bearer "){
             val intent = Intent(this@DetailActivity, LoginActivity::class.java)
             startActivity(intent)
         }
 
         val id = intent.getStringExtra(ID_THREAD).toString()
-        val threadId = id.toRequestBody("text/plain".toMediaType())
+        val threadId = id.toInt()
+        /*val threadId = id.toRequestBody("text/plain".toMediaType())*/
+        Log.e("id","id nya $id")
+        Log.e("threadid","id nya $threadId")
         viewModel =  ViewModelProvider(this, DetailViewModel.DetailViewModelFactory(threadId,token))[DetailViewModel::class.java]
         val detailThread = intent.getStringExtra(ID_THREAD)
 
@@ -77,6 +82,9 @@ class DetailActivity : AppCompatActivity() {
         }
 
         getAllComment()
+        commentAdapter = CommentAdapter()
+        binding.rvComment.layoutManager = LinearLayoutManager(this)
+
 
 
 
@@ -109,7 +117,7 @@ class DetailActivity : AppCompatActivity() {
         var token = preferences.getString(LoginActivity.TOKEN, "").toString()
         token= "Bearer $token"
 
-        val threadId = setThreadId().toString().toRequestBody("text/plain".toMediaType())
+        val threadId = setThreadId()
         val comment = setCommentText().toRequestBody("text/plain".toMediaType())
         val requestAudioFile = getAudioFile?.asRequestBody("audio/mp3".toMediaType()) ?: createEmptyRequestBody()
         val audioMultipart: MultipartBody.Part? = audioFile?.let {

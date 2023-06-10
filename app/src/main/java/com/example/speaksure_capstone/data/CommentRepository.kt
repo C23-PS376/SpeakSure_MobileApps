@@ -9,7 +9,7 @@ import com.example.speaksure_capstone.network.ApiService
 import com.example.speaksure_capstone.response.CommentItem
 import okhttp3.RequestBody
 
-class CommentRepository (private val apiService: ApiService, private val token: String, private val threadId : RequestBody){
+class CommentRepository (private val apiService: ApiService, private val token: String, private val threadId : Int){
     fun getComment(): LiveData<PagingData<CommentItem>>{
         return Pager(
             config = PagingConfig(

@@ -1,12 +1,13 @@
 package com.example.speaksure_capstone.data
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.speaksure_capstone.network.ApiService
 import com.example.speaksure_capstone.response.CommentItem
 import okhttp3.RequestBody
 
-class CommentPagingSource (private val apiService: ApiService, private val token: String, private val threadId: RequestBody) : PagingSource<Int, CommentItem>() {
+class CommentPagingSource (private val apiService: ApiService, private val token: String, private val threadId: Int) : PagingSource<Int, CommentItem>() {
 
     private companion object {
         const val INITIAL_PAGE_INDEX = 1
@@ -16,6 +17,8 @@ class CommentPagingSource (private val apiService: ApiService, private val token
         return try {
             val page = params.key ?: INITIAL_PAGE_INDEX
             val responseData = apiService.getCommentThread(token,threadId,page, params.loadSize)
+
+            Log.e("API_Response", responseData.toString())
 
             LoadResult.Page(
                 data = responseData,

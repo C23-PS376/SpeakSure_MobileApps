@@ -77,7 +77,7 @@ interface ApiService {
     @POST("threads/{threadId}/comments")
     fun setCommentThread(
         @Header("Authorization") token: String,
-        @Path("threadId") threadId: RequestBody,
+        @Path("threadId") threadId: Int,
         @Part("text") text: RequestBody,
         @Part audio : MultipartBody.Part?
     ): Call<CommentResponse>
@@ -85,7 +85,7 @@ interface ApiService {
     @GET("threads/{threadId}/comments")
     suspend fun getCommentThread(
         @Header("Authorization") token: String,
-        @Path("threadId") threadId: RequestBody,
+        @Path("threadId") threadId: Int,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<CommentItem>

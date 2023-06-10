@@ -1,7 +1,6 @@
 package com.example.speaksure_capstone.ui.detail
 
 import android.content.ContentValues
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.PagingData
@@ -27,7 +26,7 @@ class DetailViewModel(commentRepository: CommentRepository):ViewModel() {
 
     val comment : LiveData<PagingData<CommentItem>> = commentRepository.getComment().cachedIn(viewModelScope)
 
-    class DetailViewModelFactory(private val threadId: RequestBody,private val token: String) : ViewModelProvider.Factory {
+    class DetailViewModelFactory(private val threadId: Int,private val token: String) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
@@ -61,7 +60,7 @@ class DetailViewModel(commentRepository: CommentRepository):ViewModel() {
 
     fun setComment(
         token: String,
-        threadId: RequestBody,
+        threadId: Int,
         comment: RequestBody,
         audioMultipart: MultipartBody.Part?
     ) {

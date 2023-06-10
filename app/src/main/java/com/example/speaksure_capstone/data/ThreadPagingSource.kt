@@ -1,5 +1,6 @@
 package com.example.speaksure_capstone.data
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.speaksure_capstone.network.ApiService
@@ -15,6 +16,7 @@ class ThreadPagingSource(private val apiService: ApiService, private val token: 
         return try {
             val page = params.key ?: INITIAL_PAGE_INDEX
             val responseData = if(query == ""){
+                Log.e("API_Response_home", ",mmasukk")
                 apiService.getThread(token,page,params.loadSize)
             }else{
                 apiService.searchThread(token,query,page, params.loadSize)
