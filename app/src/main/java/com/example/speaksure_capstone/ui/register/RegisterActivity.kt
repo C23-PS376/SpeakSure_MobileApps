@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -64,18 +65,22 @@ class RegisterActivity : AppCompatActivity() {
                     binding.editPassword.error = "Masukkan password"
                 }
                 else -> {
+                    showLoading(true)
                     val client = ApiConfig.getApiService().register(email, name, password)
                     client.enqueue(object : Callback<LoginRegisterResponse> {
                         override fun onResponse(call: Call<LoginRegisterResponse>, response: Response<LoginRegisterResponse>) {
                             if (response.isSuccessful && response.body()?.statusCode == 201) {
+                                showLoading(false)
                                 Toast.makeText(this@RegisterActivity,"success", Toast.LENGTH_SHORT).show()
                             } else {
+                                showLoading(false)
                                 Toast.makeText(this@RegisterActivity,"error", Toast.LENGTH_SHORT).show()
                                 Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                             }
                         }
 
                         override fun onFailure(call: Call<LoginRegisterResponse>, t: Throwable) {
+                            showLoading(false)
                             Toast.makeText(this@RegisterActivity,t.message, Toast.LENGTH_SHORT).show()
                             Log.e(ContentValues.TAG, "onFailure: ${t.message}")
                         }
@@ -83,6 +88,11 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) binding.progressBar.visibility = View.VISIBLE
+        else binding.progressBar.visibility = View.GONE
     }
 
 

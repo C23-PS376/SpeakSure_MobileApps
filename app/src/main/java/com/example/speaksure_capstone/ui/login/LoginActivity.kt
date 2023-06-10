@@ -12,6 +12,7 @@ import com.example.speaksure_capstone.ui.dashboard.HomepageActivity
 import com.example.speaksure_capstone.databinding.ActivityLoginBinding
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.LoginRegisterResponse
+import com.example.speaksure_capstone.ui.register.RegisterActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +36,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
         binding.btnLogin.setOnClickListener(this)
+        binding.btnToRegister.setOnClickListener {
+            val toRegister = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(toRegister)
+        }
     }
 
     override fun onClick(view: View) {
@@ -88,7 +93,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) binding.loginProgressBar.visibility = View.VISIBLE
-        else binding.loginProgressBar.visibility = View.GONE
+        if (isLoading) binding.progressBar.visibility = View.VISIBLE
+        else binding.progressBar.visibility = View.GONE
     }
 }
