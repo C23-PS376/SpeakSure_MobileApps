@@ -72,8 +72,8 @@ class HomeFragment : Fragment() {
             }
         })
 
-        filterTopic()
 
+        filterTopic()
 
         return rootView
     }
@@ -83,7 +83,18 @@ class HomeFragment : Fragment() {
     private fun filterTopic(){
 
         adapter = ThreadPagingAdapter()
-        binding.rvThread.adapter = adapter
+        binding.rvThread.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+        viewModel.getThread().observe(viewLifecycleOwner) {
+            adapter.submitData(lifecycle, it)
+            if (isSearching) {
+                binding.rvThread.scrollToPosition(0)
+                isSearching = false
+            }
+        }
 
         // Set filter chip
 
