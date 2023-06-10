@@ -45,7 +45,9 @@ class ProfileFragment : Fragment() {
         val id = preferences.getString(LoginActivity.USER_ID,"").toString()
         viewModel.getUser(token, id)
         viewModel.detailUser.observe(viewLifecycleOwner) { detailUsers ->
+            showLoading(true)
             setDetailUser(detailUsers)
+            showLoading(false)
         }
         if(token == null){
             val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -127,6 +129,11 @@ class ProfileFragment : Fragment() {
         mediaPlayer = null
         Toast.makeText(activity, "Stop Audio", Toast.LENGTH_SHORT)
             .show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) binding.progressBar.visibility = View.VISIBLE
+        else binding.progressBar.visibility = View.GONE
     }
 
 }

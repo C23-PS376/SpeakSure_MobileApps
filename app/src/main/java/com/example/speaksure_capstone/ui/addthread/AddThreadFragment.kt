@@ -94,18 +94,15 @@ class AddThreadFragment : Fragment() {
             showImageSourceOptions()
         }
         binding.btnUpload.setOnClickListener{
+            showLoading(true)
             Log.e("btn","btn dipencet")
             uploadThread()
+            showLoading(false)
         }
 
         topic()
 
-
-
-
         initializeFragment()
-
-
 
 
         return rootView
@@ -476,5 +473,10 @@ class AddThreadFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) binding.progressBar.visibility = View.VISIBLE
+        else binding.progressBar.visibility = View.GONE
     }
 }
