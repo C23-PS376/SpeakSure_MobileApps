@@ -19,6 +19,7 @@ import com.example.speaksure_capstone.databinding.ActivityDetailBinding
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.DetailResponse
 import com.example.speaksure_capstone.response.LikeResponse
+import com.example.speaksure_capstone.ui.dashboard.HomeViewModel
 import com.example.speaksure_capstone.ui.login.LoginActivity
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -64,7 +65,8 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val id = intent.getStringExtra(ID_THREAD).toString()
-        viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
+        val threadId = id.toRequestBody("text/plain".toMediaType())
+        viewModel =  ViewModelProvider(this, DetailViewModel.DetailViewModelFactory(threadId,token, this))[DetailViewModel::class.java]
         val detailThread = intent.getStringExtra(ID_THREAD)
 
         if (detailThread!= null) {

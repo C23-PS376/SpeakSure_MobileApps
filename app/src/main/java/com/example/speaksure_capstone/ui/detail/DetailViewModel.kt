@@ -1,18 +1,18 @@
 package com.example.speaksure_capstone.ui.detail
 
 import android.content.ContentValues
+import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.speaksure_capstone.data.CommentRepository
+import com.example.speaksure_capstone.di.Injection
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.CommentItem
 import com.example.speaksure_capstone.response.CommentResponse
 import com.example.speaksure_capstone.response.DetailResponse
+import com.example.speaksure_capstone.ui.dashboard.HomeViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -28,6 +28,15 @@ class DetailViewModel(commentRepository: CommentRepository):ViewModel() {
 
     val comment : LiveData<PagingData<CommentItem>> = commentRepository.getComment().cachedIn(viewModelScope)
 
+    class DetailViewModelFactory(private val threadId: RequestBody,private val token: String, private val context: Context) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return DetailViewModel(Injection.provideCommentRepository(threadId,token,context)) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
 
 
 
@@ -76,30 +85,4 @@ class DetailViewModel(commentRepository: CommentRepository):ViewModel() {
             }
         })
     }
-
-    /*fun getComment(
-        token: String,
-        threadId: RequestBody,
-    ){
-        val client =
-            ApiConfig.getApiService().getCommentThread(token, threadId)
-        client.enqueue(object : Callback<CommentListResponse> {
-            override fun onResponse(
-                call: Call<CommentListResponse>,
-                response: Response<CommentListResponse>
-            ) {
-                if (response.isSuccessful) {
-                    _setCommentThread.value = response.body()?.commentItem
-                    Log.e(ContentValues.TAG, "onSucces: ${response.message()}")
-                } else {
-                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<CommentListResponse>, t: Throwable) {
-                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
-            }
-        })
-
-    }*/
 }
