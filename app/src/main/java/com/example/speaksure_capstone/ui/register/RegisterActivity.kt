@@ -72,6 +72,8 @@ class RegisterActivity : AppCompatActivity() {
                             if (response.isSuccessful && response.body()?.statusCode == 201) {
                                 showLoading(false)
                                 Toast.makeText(this@RegisterActivity,"success", Toast.LENGTH_SHORT).show()
+                                val toLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
+                                startActivity(toLogin)
                             } else {
                                 showLoading(false)
                                 Toast.makeText(this@RegisterActivity,"error", Toast.LENGTH_SHORT).show()

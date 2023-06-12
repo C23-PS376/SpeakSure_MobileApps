@@ -87,9 +87,8 @@
             android:id="@+id/image_thread"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_insert_photo_24"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/content_description_media" />
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
 
 
         <!-- Buttons -->
