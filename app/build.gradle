@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+
 }
 
 android {
@@ -71,5 +72,6 @@ dependencies {
     //paging
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
     implementation 'androidx.room:room-paging:2.4.2'
+
 
 }

@@ -1,6 +1,8 @@
 package com.example.speaksure_capstone.ui.addthread
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.AddThreadResponse
@@ -12,7 +14,17 @@ import retrofit2.Response
 
 class AddThreadViewModel:ViewModel() {
 
-    fun addThread(token:String,title: RequestBody, description: RequestBody,topic:RequestBody, imageMultipart: MultipartBody.Part, audioMultipart: MultipartBody.Part){
+    private val _uploadStatus = MutableLiveData<Boolean>()
+    val uploadStatus: LiveData<Boolean> = _uploadStatus
+
+
+    fun addThread(
+        token:String,
+        title: RequestBody,
+        description: RequestBody,
+        topic:RequestBody,
+        imageMultipart: MultipartBody.Part?,
+        audioMultipart: MultipartBody.Part?){
         val addNewThread = ApiConfig.getApiService().addNewThread(token,title, description,topic, imageMultipart,audioMultipart)
         Log.e("addThread","sampe sini")
         addNewThread.enqueue(object : Callback<AddThreadResponse> {
@@ -21,11 +33,18 @@ class AddThreadViewModel:ViewModel() {
                 response: Response<AddThreadResponse>
             ){
                 if(response.isSuccessful){
+                    _uploadStatus.value = true
 
                     val responseBody = response.body()
                     Log.e("success","$responseBody")
                     Log.e("success","${responseBody?.statusCode}")
+
+
+
+
+
                 }else{
+                    _uploadStatus.value = false
                     Log.e("failed 1", "Error ${response.code()}: ${response.errorBody()} ")
                     Log.e("failed 2", "Error ${response.body()?.message}")
                     Log.e("failed 3", "Error ${response.body()?.error}")
@@ -35,6 +54,8 @@ class AddThreadViewModel:ViewModel() {
             }
 
             override fun onFailure(call: Call<AddThreadResponse>, t: Throwable) {
+                _uploadStatus.value = false
+
 
 
             }
@@ -42,3 +63,4 @@ class AddThreadViewModel:ViewModel() {
 
     }
 }
+

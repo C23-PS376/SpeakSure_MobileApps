@@ -49,8 +49,8 @@ interface ApiService {
         @Part("title") title: RequestBody,
         @Part("description") description: RequestBody,
         @Part("topic") topic: RequestBody,
-        @Part photo: MultipartBody.Part,
-        @Part audio : MultipartBody.Part
+        @Part photo: MultipartBody.Part?,
+        @Part audio : MultipartBody.Part?
     ): Call<AddThreadResponse>
 
     @POST("threads/{thread_id}/likes")

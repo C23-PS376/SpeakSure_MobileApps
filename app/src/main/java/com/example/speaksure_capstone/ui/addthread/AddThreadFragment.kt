@@ -19,6 +19,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
@@ -30,6 +31,7 @@ import com.example.speaksure_capstone.ui.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.*
@@ -59,7 +61,7 @@ class AddThreadFragment : Fragment() {
 
     private var getImageFile: File? = null
     private var getAudioFile: File? = null
-    private var getTopic: String? = null
+    private var getTopic: String? = ""
 
     private val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
@@ -88,16 +90,31 @@ class AddThreadFragment : Fragment() {
 
         // Inisialisasi TextInputEditText
         textInputEditText = binding.textInput
+        titleInputEditText = binding.titleInput
         val imageView = binding.imageView
 
         imageView.setOnClickListener {
             showImageSourceOptions()
         }
+
+        viewModel.uploadStatus.observe(viewLifecycleOwner){
+            if(it){
+                showToast("Upload Success")
+                resetThread()
+            }else{
+                showToast("Upload Failed")
+                resetThread()
+            }
+        }
+
+
+
+
         binding.btnUpload.setOnClickListener{
             showLoading(true)
-            Log.e("btn","btn dipencet")
             uploadThread()
             showLoading(false)
+
         }
 
         topic()
@@ -108,6 +125,12 @@ class AddThreadFragment : Fragment() {
         return rootView
     }
 
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+
     private fun topic() {
         binding.chipGroupTopics.forEach { chip ->
             chip.setOnClickListener {
@@ -116,7 +139,6 @@ class AddThreadFragment : Fragment() {
                     R.id.topic_1 -> {
                         // Aksi untuk Topic 1 dipilih
                         getTopic = "2"
-                        Log.e("topic", "no2")
                     }
                     R.id.topic_2 -> {
                         // Aksi untuk Topic 2 dipilih
@@ -134,10 +156,21 @@ class AddThreadFragment : Fragment() {
                         // Aksi untuk Topic 5 dipilih
                         getTopic = "6"
                     }
-                    // Tambahkan aksi untuk chip lainnya sesuai kebutuhan
+                    else -> {
+                        getTopic =""
+                    }
                 }
             }
         }
+    }
+
+    private fun resetThread(){
+        titleInputEditText?.text?.clear()
+        textInputEditText?.text?.clear()
+        deleteRecordedFile()
+        resetButtonState()
+        binding.chipGroupTopics.clearCheck()
+        binding.imageView.setImageResource(R.drawable.ic_baseline_insert_photo_24)
     }
 
 
@@ -334,37 +367,54 @@ class AddThreadFragment : Fragment() {
         Log.e("btn","btn dipencet")
         Log.e("audio", getAudioFile.toString())
         Log.e("btn",getImageFile.toString())
-        Log.e("topic",getTopic.toString())
+        Log.e("title",getTitleText())
+        Log.e("desc",getDescText())
 
-            val audioFile = getAudioFile
-            val imageFile = getImageFile as File
+        val audioFile: File? = getAudioFile
+        val imageFile:File? = getImageFile
 
-            preferences = requireActivity().getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-            var token = preferences.getString(LoginActivity.TOKEN, "").toString()
-            token= "Bearer $token"
+        preferences = requireActivity().getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        var token = preferences.getString(LoginActivity.TOKEN, "").toString()
+        token= "Bearer $token"
 
-            val title = getTitleText().toRequestBody("text/plain".toMediaType())
-            val description = getDescText().toRequestBody("text/plain".toMediaType())
-            val topic = getTopic!!.toRequestBody("text/plain".toMediaType())
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-            val requestAudioFile = audioFile!!.asRequestBody("audio/mp3".toMediaType())
+        val title = getTitleText().toRequestBody("text/plain".toMediaType())
+        val description = getDescText().toRequestBody("text/plain".toMediaType())
+        val topic = getTopic!!.toRequestBody("text/plain".toMediaType())
+        val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType()) ?: createImageEmptyRequestBody()
+        val requestAudioFile = getAudioFile?.asRequestBody("audio/mp3".toMediaType()) ?: createAudioEmptyRequestBody()
 
-            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+        val imageMultipart: MultipartBody.Part? = imageFile?.let {
+            MultipartBody.Part.createFormData(
                 "image",
                 imageFile.name,
                 requestImageFile
             )
-            val audioMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+        }
+        val audioMultipart: MultipartBody.Part? = audioFile?.let {
+            MultipartBody.Part.createFormData(
                 "audio",
-                audioFile.name,
+                it.name,
                 requestAudioFile
             )
+        }
             Log.e("token", token)
+
+        if(title.toString() == "" || description.toString() == "" || getTopic.toString() == ""){
+            Toast.makeText(requireContext(), "Please Fill Empty Column", Toast.LENGTH_SHORT).show()
+        }else{
             viewModel.addThread(token,title, description,topic,imageMultipart,audioMultipart)
-
-
+        }
 
     }
+
+    private fun createAudioEmptyRequestBody(): RequestBody {
+        return "".toRequestBody("audio/mp3".toMediaType())
+    }
+
+    private fun createImageEmptyRequestBody(): RequestBody {
+        return "".toRequestBody("image/jpeg".toMediaType())
+    }
+
 
     private fun uriToFile(selectedUri: Uri, context: Context): File {
         val contentResolver: ContentResolver = context.contentResolver

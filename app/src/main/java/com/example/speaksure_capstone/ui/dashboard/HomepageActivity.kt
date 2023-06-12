@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.speaksure_capstone.R
@@ -23,10 +24,12 @@ class HomepageActivity : AppCompatActivity() {
 
         preferences = getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         val mytoken = preferences.getString(LoginActivity.TOKEN, "").toString()
-        if(mytoken == ""){
+        val isLoggedIn = preferences.getBoolean(LoginActivity.ISLOGGEDIN, false)
+        if(mytoken == "" ||!isLoggedIn ){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
 
 
 
