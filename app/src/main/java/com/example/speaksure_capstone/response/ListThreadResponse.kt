@@ -1,7 +1,5 @@
 package com.example.speaksure_capstone.response
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
@@ -24,7 +22,6 @@ data class Topic(
 	val id: Int? = null
 )
 
-@Entity(tableName = "thread")
 data class ListThreads(
 
 	@field:SerializedName("likes_count")
@@ -51,7 +48,6 @@ data class ListThreads(
 	@field:SerializedName("topic")
 	val topic: Topic? = null,
 
-	@PrimaryKey
 	@field:SerializedName("id")
 	val id: String,
 

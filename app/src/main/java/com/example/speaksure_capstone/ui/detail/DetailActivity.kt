@@ -105,7 +105,7 @@ class DetailActivity : AppCompatActivity() {
                 adapter.retry()
             }
         )
-        viewModel.comment.observe(this) {
+        viewModel.getComment().observe(this) {
             adapter.submitData(lifecycle, it)
         }
     }

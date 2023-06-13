@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class CommentListResponse(
 
-	@field:SerializedName("commentItem")
-	val commentItem: List<CommentItem>,
+	@field:SerializedName("data")
+	val dataComment: List<CommentItem>,
 
 	@field:SerializedName("statusCode")
 	val statusCode: Int

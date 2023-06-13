@@ -88,6 +88,6 @@ interface ApiService {
         @Path("threadId") threadId: Int,
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): List<CommentItem>
+    ):CommentListResponse
 
 }

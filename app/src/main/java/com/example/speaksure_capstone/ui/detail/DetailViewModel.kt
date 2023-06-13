@@ -11,20 +11,22 @@ import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.CommentItem
 import com.example.speaksure_capstone.response.CommentResponse
 import com.example.speaksure_capstone.response.DetailResponse
+import com.example.speaksure_capstone.response.ListThreads
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel(commentRepository: CommentRepository):ViewModel() {
+class DetailViewModel(private val commentRepository: CommentRepository):ViewModel() {
 
 
     private val _detailThread = MutableLiveData<DetailResponse>()
     val detailThread: LiveData<DetailResponse> = _detailThread
 
-
-    val comment : LiveData<PagingData<CommentItem>> = commentRepository.getComment().cachedIn(viewModelScope)
+    fun getComment(): LiveData<PagingData<CommentItem>> {
+        return commentRepository.getComment().cachedIn(viewModelScope)
+    }
 
     class DetailViewModelFactory(private val threadId: Int,private val token: String) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
