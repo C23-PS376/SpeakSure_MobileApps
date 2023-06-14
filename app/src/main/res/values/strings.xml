@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpeakSure_Capstone</string>
+    <string name="app_name">SpeakSure</string>
     <string name="register">Register</string>
     <string name="selamat_dat">Welcome To SpeakSure</string>
     <string name="label">Name</string>
