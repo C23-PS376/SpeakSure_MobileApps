@@ -27,12 +27,17 @@
                 android:layout_marginStart="16dp"
                 android:contentDescription="@string/image"
                 android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_account_circle_24"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
+                card_view:layout_constraintVertical_bias="1.0"/>
+=======
                 card_view:layout_constraintVertical_bias="1.0"
                 android:src="@drawable/ic_baseline_account_circle_24"
                 tools:src="@tools:sample/avatars" />
+>>>>>>> 27ac7d41d2d70186ca51caf0a13a6635f4a5288d
 
             <TextView
                 android:id="@+id/Name"
@@ -48,28 +53,17 @@
                 card_view:layout_constraintVertical_bias="0.428" />
 
             <TextView
-                android:id="@+id/time_thread"
+                android:id="@+id/date_thread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/time"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?android:attr/textColorSecondary"
-                card_view:layout_constraintStart_toEndOf="@+id/iv_photoprofile"
-                card_view:layout_constraintTop_toBottomOf="@id/Name" />
-
-            <TextView
-                android:id="@+id/date_thread"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
                 android:text="@string/date"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?android:attr/textColorSecondary"
-                card_view:layout_constraintStart_toEndOf="@+id/time_thread"
+                card_view:layout_constraintStart_toEndOf="@+id/iv_photoprofile"
                 card_view:layout_constraintTop_toBottomOf="@+id/Name" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
