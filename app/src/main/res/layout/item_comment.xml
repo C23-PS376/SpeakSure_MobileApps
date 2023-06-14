@@ -31,6 +31,7 @@
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintVertical_bias="1.0"
+                android:src="@drawable/ic_baseline_account_circle_24"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
