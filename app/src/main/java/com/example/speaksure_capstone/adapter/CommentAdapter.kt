@@ -33,7 +33,7 @@ class CommentAdapter :PagingDataAdapter<CommentItem, CommentAdapter.MyViewHolder
             var isPlaying = false
             var mediaPlayer: MediaPlayer? = null
             val timeStamp = Timestamp(data.createdAt.toLong())
-            binding.Name.text = data.text
+            binding.Name.text = data.commentUser?.name ?: ""
             binding.comment.text = data.text
             binding.dateThread.text = timeStamp.toString()
             binding.btnPlayThread.text = data.audioLength.toString()

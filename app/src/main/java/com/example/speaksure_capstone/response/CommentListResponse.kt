@@ -1,5 +1,7 @@
 package com.example.speaksure_capstone.response
 
+import androidx.room.TypeConverter
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
 data class CommentListResponse(
@@ -40,3 +42,16 @@ data class CommentItem(
 	@field:SerializedName("commentUser")
 	val commentUser: CommentUser
 )
+
+class NameConverter {
+
+	@TypeConverter
+	fun fromName(name: CommentUser?): String? {
+		return Gson().toJson(name)
+	}
+
+	@TypeConverter
+	fun toName(topicString: String?): CommentUser? {
+		return Gson().fromJson(topicString, CommentUser::class.java)
+	}
+}
