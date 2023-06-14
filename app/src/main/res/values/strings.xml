@@ -51,4 +51,7 @@
     <string name="description">Description</string>
     <string name="recorded_voice">Recorded Voice</string>
     <string name="back_to_register">Back To Register</string>
+    <string name="warning_text">Your thread contains toxic words. \nImmediately fix your post.</string>
+    <string name="warning_header"><font size="20"><b>Warning!</b></font></string>
+    <string name="return_"><b>Return</b></string>
 </resources>
