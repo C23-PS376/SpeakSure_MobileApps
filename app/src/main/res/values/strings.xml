@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">SpeakSure_Capstone</string>
     <string name="register">Register</string>
-    <string name="selamat_dat">Selamat datang di SpeakSure</string>
+    <string name="selamat_dat">Welcome To SpeakSure</string>
     <string name="label">Name</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
-    <string name="back_login">Kembali ke halaman login</string>
+    <string name="back_login">Back To login</string>
     <string name="back_register">Ke halaman register</string>
     <string name="login">Login</string>
-    <string name="selamat_kem">Selamat Datang Kembali</string>
+    <string name="selamat_kem">Welcome Back</string>
     <string name="profile">Profile</string>
     <string name="add_new_thread">Add New Thread</string>
     <string name="home">Home</string>
@@ -49,4 +49,6 @@
     <string name="delete_voice">Delete Voice</string>
     <string name="titlethread">Title</string>
     <string name="description">Description</string>
+    <string name="recorded_voice">Recorded Voice</string>
+    <string name="back_to_register">Back To Register</string>
 </resources>

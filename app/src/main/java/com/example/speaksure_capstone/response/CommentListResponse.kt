@@ -40,7 +40,10 @@ data class CommentItem(
 	val audio: Any,
 
 	@field:SerializedName("commentUser")
-	val commentUser: CommentUser
+	val commentUser: CommentUser,
+
+	@field:SerializedName("username")
+	val username: String
 )
 
 class NameConverter {

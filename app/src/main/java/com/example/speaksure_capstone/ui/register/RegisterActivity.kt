@@ -71,19 +71,19 @@ class RegisterActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<LoginRegisterResponse>, response: Response<LoginRegisterResponse>) {
                             if (response.isSuccessful && response.body()?.statusCode == 201) {
                                 showLoading(false)
-                                Toast.makeText(this@RegisterActivity,"success", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@RegisterActivity,"Register Success", Toast.LENGTH_SHORT).show()
                                 val toLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
                                 startActivity(toLogin)
                             } else {
                                 showLoading(false)
-                                Toast.makeText(this@RegisterActivity,"error", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@RegisterActivity,"Register Failed", Toast.LENGTH_SHORT).show()
                                 Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                             }
                         }
 
                         override fun onFailure(call: Call<LoginRegisterResponse>, t: Throwable) {
                             showLoading(false)
-                            Toast.makeText(this@RegisterActivity,t.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity,"Register Failed", Toast.LENGTH_SHORT).show()
                             Log.e(ContentValues.TAG, "onFailure: ${t.message}")
                         }
                     })

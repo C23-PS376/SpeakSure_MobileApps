@@ -109,9 +109,10 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="420dp"
         android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/md_theme_light_background"
         android:text="@string/login"
-        android:textColor="@color/md_theme_light_onBackground" />
+        android:backgroundTint="@color/md_theme_light_onSecondaryContainer"
+        android:textColor="@color/md_theme_light_secondaryContainer"
+         />
 
 
     <Button
@@ -124,9 +125,10 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="477dp"
         android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/md_theme_light_background"
-        android:text="Kembail ke halaman register"
-        android:textColor="@color/md_theme_light_onBackground" />
+        android:text="@string/back_to_register"
+        android:backgroundTint="@color/md_theme_light_secondaryContainer"
+        android:textColor="@color/md_theme_light_onSecondaryContainer"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"
