@@ -68,7 +68,6 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra(ID_THREAD).toString()
         val threadId = id.toInt()
-        /*val threadId = id.toRequestBody("text/plain".toMediaType())*/
         Log.e("id","id nya $id")
         Log.e("threadid","id nya $threadId")
         viewModel =  ViewModelProvider(this, DetailViewModel.DetailViewModelFactory(threadId,token))[DetailViewModel::class.java]
@@ -133,6 +132,7 @@ class DetailActivity : AppCompatActivity() {
         Log.e("msg 1", "$audioFile")
 
         viewModel.setComment(token,threadId,comment,audioMultipart)
+        binding.commentET.text.clear()
     }
 
     private fun createEmptyRequestBody(): RequestBody {
