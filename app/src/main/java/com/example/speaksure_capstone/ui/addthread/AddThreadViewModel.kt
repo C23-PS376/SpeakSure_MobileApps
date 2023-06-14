@@ -33,7 +33,7 @@ class AddThreadViewModel:ViewModel() {
                 response: Response<AddThreadResponse>
             ){
                 if(response.isSuccessful){
-                    _uploadStatus.value = true
+                    _uploadStatus.value = false
 
                     val responseBody = response.body()
                     Log.e("success","$responseBody")
@@ -44,7 +44,7 @@ class AddThreadViewModel:ViewModel() {
 
 
                 }else{
-                    _uploadStatus.value = false
+                    _uploadStatus.value = true
                     Log.e("failed 1", "Error ${response.code()}: ${response.errorBody()} ")
                     Log.e("failed 2", "Error ${response.body()?.message}")
                     Log.e("failed 3", "Error ${response.body()?.error}")
@@ -54,7 +54,8 @@ class AddThreadViewModel:ViewModel() {
             }
 
             override fun onFailure(call: Call<AddThreadResponse>, t: Throwable) {
-                _uploadStatus.value = false
+                _uploadStatus.value = true
+
 
 
 

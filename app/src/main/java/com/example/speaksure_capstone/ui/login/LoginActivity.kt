@@ -72,6 +72,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         showLoading(false)
                         startActivity(mainIntent)
                         finish()
+                    }else{
+                        showLoading(false)
+                        Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
+
                     }
                 }
 
