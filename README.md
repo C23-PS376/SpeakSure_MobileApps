@@ -1,7 +1,5 @@
-# **SpeakSure_MobileApps**
+# SpeakSure Documentation
 
-
-# Dokumentasi Aplikasi Android
 
 Berikut adalah panduan langkah demi langkah untuk mengunduh, menginstal, dan menjalankan aplikasi Android menggunakan Android Studio dan Git.
 
@@ -39,9 +37,7 @@ Untuk melakukan Git clone dari repositori GitHub, ikuti langkah-langkah berikut:
 1. Buka terminal atau command prompt pada sistem Anda.
 2. Pindah ke direktori tempat Anda ingin melakukan clone repositori.
 3. Salin URL repositori GitHub yang ingin Anda clone.
-4. Jalankan perintah berikut ini di terminal atau command prompt untuk melakukan clone:
-
-git clone https://github.com/C23-PS376/SpeakSure_MobileApps.git
+4. Jalankan perintah berikut ini di terminal atau command prompt untuk melakukan clone: ```git clone https://github.com/C23-PS376/SpeakSure_MobileApps.git```
 
 5. Git akan mengunduh repositori ke direktori yang ditentukan.
 
@@ -58,7 +54,7 @@ Untuk menghasilkan APK dari kode sumber aplikasi Android, ikuti langkah-langkah 
 7. Tunggu hingga proses build selesai.
 8. Setelah selesai, APK akan dihasilkan dan dapat ditemukan di direktori proyek, biasanya dalam folder "app/build/outputs/apk/release".
 
-Selamat! Anda telah berhasil membuat APK dari kode sumber aplikasi **Speaksure**.
+Selamat! Anda telah berhasil membuat APK dari kode sumber aplikasi **SpeakSure**.
 
 Harap dicatat bahwa langkah-langkah di atas memberikan gambaran umum tentang cara mengunduh, menginstal, dan menjalankan aplikasi Android menggunakan Android Studio dan Git. Anda mungkin perlu menyesuaikan langkah-langkah tersebut sesuai dengan kebutuhan dan lingkungan pengembangan Anda.
 
