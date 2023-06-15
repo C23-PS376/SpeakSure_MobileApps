@@ -3,6 +3,7 @@ package com.example.speaksure_capstone.adapter
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -51,9 +52,13 @@ class CommentAdapter :PagingDataAdapter<CommentItem, CommentAdapter.MyViewHolder
                     mediaPlayer = null
                     mediaPlayer = MediaPlayer().apply {
                         try {
-                            setDataSource(data.audio.toString())
-                            prepare()
-                            start()
+                            if(data.audio==null){
+                                Toast.makeText(binding.root.context, "No Data", Toast.LENGTH_SHORT).show()
+                            }else{
+                                setDataSource(data.audio.toString())
+                                prepare()
+                                start()
+                            }
                         } catch (e: IOException) {
                         }
                     }
