@@ -1,62 +1,60 @@
 # SpeakSure Documentation
 
+Here is a step-by-step guide to download, install, and run SpeakSure using Android Studio and Git.
 
-Berikut adalah panduan langkah demi langkah untuk mengunduh, menginstal, dan menjalankan aplikasi Android menggunakan Android Studio dan Git.
+## Prerequisites
 
-## Persyaratan
+Before getting started, make sure you meet the following requirements:
 
-Sebelum memulai, pastikan Anda telah memenuhi persyaratan berikut:
+1. **Android Studio**: Ensure that you have Android Studio installed. If not, you can download it from the following link: [Android Studio](https://developer.android.com/studio).
+2. **Git**: Make sure you have Git installed on your system. If not, you can download it from the following link: [Git](https://git-scm.com/downloads).
 
-1. **Android Studio**: Pastikan Anda telah menginstal Android Studio. Jika belum, Anda dapat mengunduhnya dari tautan berikut: [Android Studio](https://developer.android.com/studio).
-2. **Git**: Pastikan Anda telah menginstal Git pada sistem Anda. Jika belum, Anda dapat mengunduhnya dari tautan berikut: [Git](https://git-scm.com/downloads).
+## Steps
 
-## Langkah-langkah
+### 1. Downloading and Installing Android Studio
 
-### 1. Mengunduh dan Menginstal Android Studio
+You can follow these steps to download and install Android Studio:
 
-Anda dapat mengikuti langkah-langkah berikut untuk mengunduh dan menginstal Android Studio:
+1. Visit [this link](https://developer.android.com/studio) and download Android Studio based on your operating system.
+2. Once the download is complete, open the installation file and follow the on-screen instructions to install Android Studio.
+3. Follow the installation steps provided by the installer until the installation is complete.
+4. Once finished, Android Studio will be installed on your system.
 
-1. Kunjungi [tautan ini](https://developer.android.com/studio) dan unduh Android Studio sesuai dengan sistem operasi yang Anda gunakan.
-2. Setelah selesai mengunduh, buka file instalasi dan ikuti petunjuk pada layar untuk menginstal Android Studio.
-3. Ikuti langkah-langkah instalasi yang disediakan oleh installer hingga selesai.
-4. Setelah selesai, Android Studio akan terinstal di sistem Anda.
+### 2. Downloading and Installing Git
 
-### 2. Mengunduh dan Menginstal Git
+You can follow these steps to download and install Git:
 
-Anda dapat mengikuti langkah-langkah berikut untuk mengunduh dan menginstal Git:
+1. Visit [this link](https://git-scm.com/downloads) and download Git based on your operating system.
+2. Once the download is complete, open the installation file and follow the on-screen instructions to install Git.
+3. Follow the installation steps provided by the installer until the installation is complete.
+4. Once finished, Git will be installed on your system.
 
-1. Kunjungi [tautan ini](https://git-scm.com/downloads) dan unduh Git sesuai dengan sistem operasi yang Anda gunakan.
-2. Setelah selesai mengunduh, buka file instalasi dan ikuti petunjuk pada layar untuk menginstal Git.
-3. Ikuti langkah-langkah instalasi yang disediakan oleh installer hingga selesai.
-4. Setelah selesai, Git akan terinstal di sistem Anda.
+### 3. Performing Git Clone from GitHub Repo
 
-### 3. Melakukan Git Clone dari Repo GitHub
+To perform a Git clone from a GitHub repository, follow these steps:
 
-Untuk melakukan Git clone dari repositori GitHub, ikuti langkah-langkah berikut:
+1. Open a terminal or command prompt on your system.
+2. Navigate to the directory where you want to perform the repository clone.
+3. Copy the URL of the GitHub repository you want to clone.
+4. Run the following command in the terminal or command prompt to perform the clone:
 
-1. Buka terminal atau command prompt pada sistem Anda.
-2. Pindah ke direktori tempat Anda ingin melakukan clone repositori.
-3. Salin URL repositori GitHub yang ingin Anda clone.
-4. Jalankan perintah berikut ini di terminal atau command prompt untuk melakukan clone: 
 > ```git clone https://github.com/C23-PS376/SpeakSure_MobileApps.git```
 
 5. Git akan mengunduh repositori ke direktori yang ditentukan.
 
-### 4. Membuat Aplikasi Android dari Kode Menjadi APK
+5. Git will download the repository to the specified directory.
 
-Untuk menghasilkan APK dari kode sumber aplikasi Android, ikuti langkah-langkah berikut:
+### 4. Building an Android App from Code to APK
 
-1. Buka Android Studio di sistem Anda.
-2. Pilih opsi "Open an existing Android Studio project" pada layar utama.
-3. Pilih direktori tempat Anda melakukan Git clone dari repositori.
-4. Tunggu hingga Android Studio membuka proyek.
-5. Pada bilah menu atas, pilih "Build" dan kemudian pilih "Build Bundle(s) / APK(s)".
-6. Pilih opsi "Build APK(s)".
-7. Tunggu hingga proses build selesai.
-8. Setelah selesai, APK akan dihasilkan dan dapat ditemukan di direktori proyek, biasanya dalam folder "app/build/outputs/apk/release".
+To generate an APK from the source code of the Android application, follow these steps:
 
-Selamat! Anda telah berhasil membuat APK dari kode sumber aplikasi **SpeakSure**.
+1. Open Android Studio on your system.
+2. Select the "Open an existing Android Studio project" option on the main screen.
+3. Choose the directory where you performed the Git clone from the repository.
+4. Wait for Android Studio to open the project.
+5. On the top menu bar, select "Build" and then choose "Build Bundle(s) / APK(s)".
+6. Select the "Build APK(s)" option.
+7. Wait for the build process to complete.
+8. Once finished, the APK will be generated and can be found in the project directory, usually in the "app/build/outputs/apk/release" folder.
 
-Harap dicatat bahwa langkah-langkah di atas memberikan gambaran umum tentang cara mengunduh, menginstal, dan menjalankan aplikasi Android menggunakan Android Studio dan Git. Anda mungkin perlu menyesuaikan langkah-langkah tersebut sesuai dengan kebutuhan dan lingkungan pengembangan Anda.
-
-
+Congratulations! You have successfully created an **Speaksure** APK from the Android application source code.
