@@ -38,7 +38,7 @@ Untuk melakukan Git clone dari repositori GitHub, ikuti langkah-langkah berikut:
 2. Pindah ke direktori tempat Anda ingin melakukan clone repositori.
 3. Salin URL repositori GitHub yang ingin Anda clone.
 4. Jalankan perintah berikut ini di terminal atau command prompt untuk melakukan clone: 
-> ```terminal git clone https://github.com/C23-PS376/SpeakSure_MobileApps.git```
+> ```git clone https://github.com/C23-PS376/SpeakSure_MobileApps.git```
 
 5. Git akan mengunduh repositori ke direktori yang ditentukan.
 
