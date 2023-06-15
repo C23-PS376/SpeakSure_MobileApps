@@ -21,6 +21,7 @@ import com.example.speaksure_capstone.network.ApiConfig
 import com.example.speaksure_capstone.response.DetailResponse
 import com.example.speaksure_capstone.response.LikeResponse
 import com.example.speaksure_capstone.ui.login.LoginActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -78,6 +79,19 @@ class DetailActivity : AppCompatActivity() {
         }
         viewModel.detailThread.observe(this) { detailThreads ->
             setDetailThread(detailThreads)
+        }
+
+        viewModel.toxicStatus.observe(this){
+            if(it){
+                val dialog = MaterialAlertDialogBuilder(this)
+                    .setTitle("Warning!")
+                    .setMessage("Your comment contains toxic words. \n Immediately fix your comment.")
+                    .setPositiveButton("Return") { _, _ ->
+                        binding.commentET.text.clear()
+                    }
+                    .create()
+                dialog.show()
+            }
         }
 
         getAllComment()

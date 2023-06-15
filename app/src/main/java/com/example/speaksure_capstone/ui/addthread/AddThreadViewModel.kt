@@ -17,6 +17,9 @@ class AddThreadViewModel:ViewModel() {
     private val _uploadStatus = MutableLiveData<Boolean>()
     val uploadStatus: LiveData<Boolean> = _uploadStatus
 
+    private val _toxicStatus = MutableLiveData<Boolean>()
+    val toxicStatus: LiveData<Boolean> = _toxicStatus
+
 
     fun addThread(
         token:String,
@@ -33,24 +36,30 @@ class AddThreadViewModel:ViewModel() {
                 response: Response<AddThreadResponse>
             ){
                 if(response.isSuccessful){
-                    _uploadStatus.value = false
+                    if(response.code() == 400){
+                        Log.e("toxic", response.message())
+                        _toxicStatus.value = true
+                    }else{
+                        _uploadStatus.value = false
 
-                    val responseBody = response.body()
-                    Log.e("success","$responseBody")
-                    Log.e("success","${responseBody?.statusCode}")
-
-
-
-
+                        val responseBody = response.body()
+                        Log.e("success","$responseBody")
+                        Log.e("success","${responseBody?.statusCode}")
+                    }
 
                 }else{
-                    _uploadStatus.value = true
-                    Log.e("failed 1", "Error ${response.code()}: ${response.errorBody()} ")
-                    Log.e("failed 2", "Error ${response.body()?.message}")
-                    Log.e("failed 3", "Error ${response.body()?.error}")
-                    Log.e("failed 4", "Error ${response.body()}")
-                }
+                    if(response.code() == 400){
+                        Log.e("toxic", response.message())
+                        _toxicStatus.value = true
 
+                    }else{
+                        _uploadStatus.value = true
+                        Log.e("failed 1", "Error ${response.code()}: ${response.errorBody()} ")
+                        Log.e("failed 2", "Error ${response.body()?.message}")
+                        Log.e("failed 3", "Error ${response.body()?.error}")
+                        Log.e("failed 4", "Error ${response.body()}")
+                    }
+                }
             }
 
             override fun onFailure(call: Call<AddThreadResponse>, t: Throwable) {

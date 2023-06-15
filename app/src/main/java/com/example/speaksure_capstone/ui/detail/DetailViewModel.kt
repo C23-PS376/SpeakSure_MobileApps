@@ -25,6 +25,9 @@ class DetailViewModel(private val commentRepository: CommentRepository):ViewMode
     private val _detailThread = MutableLiveData<DetailResponse>()
     val detailThread: LiveData<DetailResponse> = _detailThread
 
+    private val _toxicStatus = MutableLiveData<Boolean>()
+    val toxicStatus: LiveData<Boolean> = _toxicStatus
+
     fun getComment(): LiveData<PagingData<CommentItem>> {
         return commentRepository.getComment().cachedIn(viewModelScope)
     }
@@ -75,9 +78,17 @@ class DetailViewModel(private val commentRepository: CommentRepository):ViewMode
                 response: Response<CommentResponse>
             ) {
                 if (response.isSuccessful) {
+                    if(response.code() == 400){
+                        Log.e("toxic", response.message())
+                        _toxicStatus.value = true
+                    }
                     Log.e(ContentValues.TAG, "sukses: ${response.message()}")
                 } else {
-                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    if(response.code() == 400){
+                        Log.e("toxic", response.message())
+                        _toxicStatus.value = true
+                    }
+                    Log.e(ContentValues.TAG, "sukses: ${response.message()}")
                 }
             }
 

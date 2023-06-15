@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.speaksure_capstone.R
 import com.example.speaksure_capstone.databinding.FragmentAddThreadBinding
 import com.example.speaksure_capstone.ui.login.LoginActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -104,6 +105,23 @@ class AddThreadFragment : Fragment() {
             }else{
                 showToast("Upload Failed")
                 resetThread()
+
+            }
+        }
+
+        viewModel.toxicStatus.observe(viewLifecycleOwner){
+            if(it){
+                val dialog = context?.let { it1 ->
+                    MaterialAlertDialogBuilder(it1)
+                        .setTitle("Warning!")
+                        .setMessage("Your thread contains toxic words. \n Immediately fix your post.")
+                        .setPositiveButton("Return") { _, _ ->
+                            titleInputEditText?.text?.clear()
+                            textInputEditText?.text?.clear()
+                        }
+                        .create()
+                }
+                dialog?.show()
             }
         }
 
